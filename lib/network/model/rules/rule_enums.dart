@@ -61,8 +61,8 @@ class CheckInRule extends EnumClass {
 
   const CheckInRule._(String name) : super(name);
 
-  static BuiltSet<CheckInRule> get values => _$checkinValues;
-  static CheckInRule valueOf(String name) => _$checkinValueOf(name);
+  static BuiltSet<CheckInRule> get values => _$checkInValues;
+  static CheckInRule valueOf(String name) => _$checkInValueOf(name);
 }
 
 @BuiltValueEnum(wireName: 'NotAssignedShiftRule')

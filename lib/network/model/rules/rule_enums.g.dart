@@ -61,7 +61,7 @@ const CheckInRule _$geo = const CheckInRule._('geo');
 const CheckInRule _$photo = const CheckInRule._('photo');
 const CheckInRule _$geoAndPhoto = const CheckInRule._('geoAndPhoto');
 
-CheckInRule _$checkinValueOf(String name) {
+CheckInRule _$checkInValueOf(String name) {
   switch (name) {
     case 'button':
       return _$button;
@@ -76,7 +76,7 @@ CheckInRule _$checkinValueOf(String name) {
   }
 }
 
-final BuiltSet<CheckInRule> _$checkinValues =
+final BuiltSet<CheckInRule> _$checkInValues =
     new BuiltSet<CheckInRule>(const <CheckInRule>[
   _$button,
   _$geo,
