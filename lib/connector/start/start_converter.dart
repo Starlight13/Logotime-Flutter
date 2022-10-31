@@ -10,7 +10,7 @@ class StartConverter extends ViewModelConverter<StartViewModel> {
   @override
   StartViewModel build() {
     return StartViewModel(((p0) => p0
-      ..onLogInPressed = (() => print('Log in pressed'))
+      ..onLogInPressed = (() => {})
       ..onCreateOrganisationPressed = (() {
         dispatch(NavigateToCreateOwnerAction());
       })));
