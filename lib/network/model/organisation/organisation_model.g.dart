@@ -19,20 +19,36 @@ class _$OrganisationModelSerializer
   @override
   Iterable<Object?> serialize(Serializers serializers, OrganisationModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'organizationSize',
-      serializers.serialize(object.organizationSize,
-          specifiedType: const FullType(OrganisationSize)),
-      'user',
-      serializers.serialize(object.user,
-          specifiedType: const FullType(UserModel)),
-      'rules',
-      serializers.serialize(object.rules,
-          specifiedType: const FullType(RulesModel)),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.organizationSize;
+    if (value != null) {
+      result
+        ..add('organizationSize')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(OrganisationSize)));
+    }
+    value = object.rules;
+    if (value != null) {
+      result
+        ..add('rules')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(RulesModel)));
+    }
     return result;
   }
 
@@ -48,18 +64,18 @@ class _$OrganisationModelSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'organizationSize':
           result.organizationSize = serializers.deserialize(value,
-                  specifiedType: const FullType(OrganisationSize))!
-              as OrganisationSize;
-          break;
-        case 'user':
-          result.user.replace(serializers.deserialize(value,
-              specifiedType: const FullType(UserModel))! as UserModel);
+                  specifiedType: const FullType(OrganisationSize))
+              as OrganisationSize?;
           break;
         case 'rules':
           result.rules.replace(serializers.deserialize(value,
@@ -74,30 +90,20 @@ class _$OrganisationModelSerializer
 
 class _$OrganisationModel extends OrganisationModel {
   @override
-  final String name;
+  final String? id;
   @override
-  final OrganisationSize organizationSize;
+  final String? name;
   @override
-  final UserModel user;
+  final OrganisationSize? organizationSize;
   @override
-  final RulesModel rules;
+  final RulesModel? rules;
 
   factory _$OrganisationModel(
           [void Function(OrganisationModelBuilder)? updates]) =>
       (new OrganisationModelBuilder()..update(updates))._build();
 
-  _$OrganisationModel._(
-      {required this.name,
-      required this.organizationSize,
-      required this.user,
-      required this.rules})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, r'OrganisationModel', 'name');
-    BuiltValueNullFieldError.checkNotNull(
-        organizationSize, r'OrganisationModel', 'organizationSize');
-    BuiltValueNullFieldError.checkNotNull(user, r'OrganisationModel', 'user');
-    BuiltValueNullFieldError.checkNotNull(rules, r'OrganisationModel', 'rules');
-  }
+  _$OrganisationModel._({this.id, this.name, this.organizationSize, this.rules})
+      : super._();
 
   @override
   OrganisationModel rebuild(void Function(OrganisationModelBuilder) updates) =>
@@ -111,26 +117,25 @@ class _$OrganisationModel extends OrganisationModel {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is OrganisationModel &&
+        id == other.id &&
         name == other.name &&
         organizationSize == other.organizationSize &&
-        user == other.user &&
         rules == other.rules;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, name.hashCode), organizationSize.hashCode),
-            user.hashCode),
+        $jc($jc($jc(0, id.hashCode), name.hashCode), organizationSize.hashCode),
         rules.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'OrganisationModel')
+          ..add('id', id)
           ..add('name', name)
           ..add('organizationSize', organizationSize)
-          ..add('user', user)
           ..add('rules', rules))
         .toString();
   }
@@ -139,6 +144,10 @@ class _$OrganisationModel extends OrganisationModel {
 class OrganisationModelBuilder
     implements Builder<OrganisationModel, OrganisationModelBuilder> {
   _$OrganisationModel? _$v;
+
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
   String? _name;
   String? get name => _$this._name;
@@ -149,10 +158,6 @@ class OrganisationModelBuilder
   set organizationSize(OrganisationSize? organizationSize) =>
       _$this._organizationSize = organizationSize;
 
-  UserModelBuilder? _user;
-  UserModelBuilder get user => _$this._user ??= new UserModelBuilder();
-  set user(UserModelBuilder? user) => _$this._user = user;
-
   RulesModelBuilder? _rules;
   RulesModelBuilder get rules => _$this._rules ??= new RulesModelBuilder();
   set rules(RulesModelBuilder? rules) => _$this._rules = rules;
@@ -162,10 +167,10 @@ class OrganisationModelBuilder
   OrganisationModelBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _id = $v.id;
       _name = $v.name;
       _organizationSize = $v.organizationSize;
-      _user = $v.user.toBuilder();
-      _rules = $v.rules.toBuilder();
+      _rules = $v.rules?.toBuilder();
       _$v = null;
     }
     return this;
@@ -190,19 +195,15 @@ class OrganisationModelBuilder
     try {
       _$result = _$v ??
           new _$OrganisationModel._(
-              name: BuiltValueNullFieldError.checkNotNull(
-                  name, r'OrganisationModel', 'name'),
-              organizationSize: BuiltValueNullFieldError.checkNotNull(
-                  organizationSize, r'OrganisationModel', 'organizationSize'),
-              user: user.build(),
-              rules: rules.build());
+              id: id,
+              name: name,
+              organizationSize: organizationSize,
+              rules: _rules?.build());
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'user';
-        user.build();
         _$failedField = 'rules';
-        rules.build();
+        _rules?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'OrganisationModel', _$failedField, e.toString());

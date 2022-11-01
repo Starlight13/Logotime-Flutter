@@ -13,7 +13,7 @@ class OrganisationSize extends EnumClass {
   static const OrganisationSize small = _$small;
 
   @BuiltValueEnumConst(wireName: 'MIDDLE')
-  static const OrganisationSize middle = _$middle;
+  static const OrganisationSize medium = _$medium;
 
   @BuiltValueEnumConst(wireName: 'LARGE')
   static const OrganisationSize large = _$large;

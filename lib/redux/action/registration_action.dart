@@ -1,7 +1,3 @@
-import 'package:logotime/network/model/user/user_model.dart';
+export './registration/create_owner_action.dart';
 
-class OwnerInfoEntered {
-  final UserModel ownerInfo;
-
-  const OwnerInfoEntered(this.ownerInfo);
-}
+class CancelRegistrationAction {}

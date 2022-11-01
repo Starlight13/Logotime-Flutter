@@ -33,10 +33,16 @@ class MyApp extends StatelessWidget {
           Locale('en', ''),
         ],
         theme: ThemeData(
+          primaryColor: AppColors.orange,
           fontFamily: 'Balsamiq Sans',
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColors.white,
             iconTheme: IconThemeData(color: Colors.brown),
+            titleTextStyle: TextStyle(
+              color: Colors.brown,
+              fontSize: 22.0,
+              fontFamily: 'Balsamiq Sans',
+            ),
           ),
         ),
         home: StoreProvider<AppState>(

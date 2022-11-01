@@ -10,6 +10,12 @@ abstract class RegistrationState
   UserModel? get owner;
   OrganisationSize? get organisation;
   RulesModel? get organisationRules;
+  String? get password;
+  String? get emailError;
+  String? get passwordError;
+  String? get phoneNumberError;
+  String? get firstNameError;
+  String? get lastNameError;
   bool get isLoading;
 
   RegistrationState._();

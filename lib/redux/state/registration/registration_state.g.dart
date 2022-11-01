@@ -14,6 +14,18 @@ class _$RegistrationState extends RegistrationState {
   @override
   final RulesModel? organisationRules;
   @override
+  final String? password;
+  @override
+  final String? emailError;
+  @override
+  final String? passwordError;
+  @override
+  final String? phoneNumberError;
+  @override
+  final String? firstNameError;
+  @override
+  final String? lastNameError;
+  @override
   final bool isLoading;
 
   factory _$RegistrationState(
@@ -24,6 +36,12 @@ class _$RegistrationState extends RegistrationState {
       {this.owner,
       this.organisation,
       this.organisationRules,
+      this.password,
+      this.emailError,
+      this.passwordError,
+      this.phoneNumberError,
+      this.firstNameError,
+      this.lastNameError,
       required this.isLoading})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -45,14 +63,34 @@ class _$RegistrationState extends RegistrationState {
         owner == other.owner &&
         organisation == other.organisation &&
         organisationRules == other.organisationRules &&
+        password == other.password &&
+        emailError == other.emailError &&
+        passwordError == other.passwordError &&
+        phoneNumberError == other.phoneNumberError &&
+        firstNameError == other.firstNameError &&
+        lastNameError == other.lastNameError &&
         isLoading == other.isLoading;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, owner.hashCode), organisation.hashCode),
-            organisationRules.hashCode),
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, owner.hashCode),
+                                        organisation.hashCode),
+                                    organisationRules.hashCode),
+                                password.hashCode),
+                            emailError.hashCode),
+                        passwordError.hashCode),
+                    phoneNumberError.hashCode),
+                firstNameError.hashCode),
+            lastNameError.hashCode),
         isLoading.hashCode));
   }
 
@@ -62,6 +100,12 @@ class _$RegistrationState extends RegistrationState {
           ..add('owner', owner)
           ..add('organisation', organisation)
           ..add('organisationRules', organisationRules)
+          ..add('password', password)
+          ..add('emailError', emailError)
+          ..add('passwordError', passwordError)
+          ..add('phoneNumberError', phoneNumberError)
+          ..add('firstNameError', firstNameError)
+          ..add('lastNameError', lastNameError)
           ..add('isLoading', isLoading))
         .toString();
   }
@@ -86,6 +130,34 @@ class RegistrationStateBuilder
   set organisationRules(RulesModelBuilder? organisationRules) =>
       _$this._organisationRules = organisationRules;
 
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
+
+  String? _emailError;
+  String? get emailError => _$this._emailError;
+  set emailError(String? emailError) => _$this._emailError = emailError;
+
+  String? _passwordError;
+  String? get passwordError => _$this._passwordError;
+  set passwordError(String? passwordError) =>
+      _$this._passwordError = passwordError;
+
+  String? _phoneNumberError;
+  String? get phoneNumberError => _$this._phoneNumberError;
+  set phoneNumberError(String? phoneNumberError) =>
+      _$this._phoneNumberError = phoneNumberError;
+
+  String? _firstNameError;
+  String? get firstNameError => _$this._firstNameError;
+  set firstNameError(String? firstNameError) =>
+      _$this._firstNameError = firstNameError;
+
+  String? _lastNameError;
+  String? get lastNameError => _$this._lastNameError;
+  set lastNameError(String? lastNameError) =>
+      _$this._lastNameError = lastNameError;
+
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
   set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
@@ -98,6 +170,12 @@ class RegistrationStateBuilder
       _owner = $v.owner?.toBuilder();
       _organisation = $v.organisation;
       _organisationRules = $v.organisationRules?.toBuilder();
+      _password = $v.password;
+      _emailError = $v.emailError;
+      _passwordError = $v.passwordError;
+      _phoneNumberError = $v.phoneNumberError;
+      _firstNameError = $v.firstNameError;
+      _lastNameError = $v.lastNameError;
       _isLoading = $v.isLoading;
       _$v = null;
     }
@@ -126,6 +204,12 @@ class RegistrationStateBuilder
               owner: _owner?.build(),
               organisation: organisation,
               organisationRules: _organisationRules?.build(),
+              password: password,
+              emailError: emailError,
+              passwordError: passwordError,
+              phoneNumberError: phoneNumberError,
+              firstNameError: firstNameError,
+              lastNameError: lastNameError,
               isLoading: BuiltValueNullFieldError.checkNotNull(
                   isLoading, r'RegistrationState', 'isLoading'));
     } catch (_) {

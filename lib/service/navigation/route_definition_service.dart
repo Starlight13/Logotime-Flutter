@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logotime/connector/registration/create_owner_connector.dart';
 import 'package:logotime/connector/start/start_connector.dart';
 import 'package:logotime/service/navigation/route_direction.dart';
 
@@ -15,6 +16,9 @@ class RouteDefinitionService extends IRouteDefinitionService {
       case RouteDirection.startScreen:
         return MaterialPageRoute(
             builder: ((_) => const StartConnector()), settings: settings);
+      case RouteDirection.createOrganisationOwnerScreen:
+        return MaterialPageRoute(
+            builder: ((_) => const CreateOwnerConnector()), settings: settings);
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

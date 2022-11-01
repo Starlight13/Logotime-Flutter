@@ -1,4 +1,11 @@
 {
-  "createOrganisation": "Create Organisation",
-  "logIn": "Log in"
+  "createOrganisation": "create organisation",
+  "email": "e-mail",
+  "firstName": "first name",
+  "lastName": "last name",
+  "logIn": "log in",
+  "nextStep": "next step",
+  "ownerInfo": "owner information",
+  "password": "password",
+  "phone": "phone number"
 }
