@@ -1,11 +1,26 @@
 {
+  "allow": "allow",
+  "checkInRule": "check-in rule",
   "createOrganisation": "create organisation",
   "email": "e-mail",
   "firstName": "first name",
+  "geoCheckIn": "check-in with geolocation",
   "lastName": "last name",
   "logIn": "log in",
+  "maxApplicationsHint": "Leave empty or 0 to not limit",
+  "maxNumOfApplications": "max number of applications",
+  "needApproval": "needs approval",
   "nextStep": "next step",
+  "organisationName": "organisation Name",
+  "organisationSize": "organisation size",
   "ownerInfo": "owner information",
   "password": "password",
-  "phone": "phone number"
+  "phone": "phone number",
+  "photoCheckIn": "check-in with photo",
+  "substitution": "substitution",
+  "substitutionRule": "substitution rule",
+  "swapShiftsRule": "swap shifts rule",
+  "swappingShifts": "swapping shifts",
+  "unassignedShift": "unassigned shift",
+  "unassignedShifts": "unassigned shifts"
 }

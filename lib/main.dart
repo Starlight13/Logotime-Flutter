@@ -35,6 +35,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: AppColors.orange,
           fontFamily: 'Balsamiq Sans',
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColors.white,
             iconTheme: IconThemeData(color: Colors.brown),

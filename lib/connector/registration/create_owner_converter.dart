@@ -35,7 +35,7 @@ class CreateOwnerConverter implements ViewModelConverter<CreateOwnerViewModel> {
   }
 
   void _createOwner(UserModel userModel, String password) {
-    dispatch(OwnerInfoEntered(
+    dispatch(OwnerInfoEnteredAction(
       ownerInfo: userModel,
       password: password,
     ));

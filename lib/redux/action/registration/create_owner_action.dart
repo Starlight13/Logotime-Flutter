@@ -1,11 +1,11 @@
 import 'package:logotime/network/model/user/user_model.dart';
 import 'package:logotime/redux/action/common/validation_failed_action.dart';
 
-class OwnerInfoEntered {
+class OwnerInfoEnteredAction {
   final UserModel ownerInfo;
   final String password;
 
-  const OwnerInfoEntered({
+  const OwnerInfoEnteredAction({
     required this.ownerInfo,
     required this.password,
   });
@@ -19,16 +19,16 @@ class PasswordValidationFailedAction extends ValidationFailedAction {
   PasswordValidationFailedAction({required super.error});
 }
 
-class PhoneNumberValidationFailed extends ValidationFailedAction {
-  PhoneNumberValidationFailed({required super.error});
+class PhoneNumberValidationFailedAction extends ValidationFailedAction {
+  PhoneNumberValidationFailedAction({required super.error});
 }
 
 class FirstNameValidationFailedAction extends ValidationFailedAction {
   FirstNameValidationFailedAction({required super.error});
 }
 
-class LastNameValidationFailed extends ValidationFailedAction {
-  LastNameValidationFailed({required super.error});
+class LastNameValidationFailedAction extends ValidationFailedAction {
+  LastNameValidationFailedAction({required super.error});
 }
 
 class OwnerInfoValidationSucceeded {

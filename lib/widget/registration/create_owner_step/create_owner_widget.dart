@@ -18,11 +18,21 @@ class CreateOwnerWidget extends StatefulWidget {
 }
 
 class _CreateOwnerWidgetState extends State<CreateOwnerWidget> {
-  String email = '';
-  String phoneNumber = '';
-  String password = '';
-  String firstName = '';
-  String lastName = '';
+  late TextEditingController emailController;
+  late TextEditingController phoneNumberController;
+  late TextEditingController passwordController;
+  late TextEditingController firstNameController;
+  late TextEditingController lastNameController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    phoneNumberController = TextEditingController();
+    passwordController = TextEditingController();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,60 +48,68 @@ class _CreateOwnerWidgetState extends State<CreateOwnerWidget> {
           onPressed: widget.viewModel.onBackButtonPress,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-                child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                StyledTextField(
-                  fieldTitle: localizations.email,
-                  onChanged: (newValue) => setState((() => email = newValue)),
-                  error: widget.viewModel.emailError,
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: StyledTextField(
+                    fieldTitle: localizations.email,
+                    error: widget.viewModel.emailError,
+                    controller: emailController,
+                  ),
                 ),
                 StyledTextField(
                   fieldTitle: localizations.phone,
-                  onChanged: (newValue) =>
-                      setState((() => phoneNumber = newValue)),
                   error: widget.viewModel.phoneNumberError,
+                  controller: phoneNumberController,
+                  hint: '+380XXXXXXXXX',
                 ),
                 StyledTextField(
                   fieldTitle: localizations.password,
-                  onChanged: (newValue) =>
-                      setState((() => password = newValue)),
                   error: widget.viewModel.passwordError,
+                  controller: passwordController,
                 ),
                 StyledTextField(
                   fieldTitle: localizations.firstName,
-                  onChanged: (newValue) =>
-                      setState((() => firstName = newValue)),
                   error: widget.viewModel.firstNameError,
+                  controller: firstNameController,
                 ),
                 StyledTextField(
                   fieldTitle: localizations.lastName,
-                  onChanged: (newValue) =>
-                      setState((() => lastName = newValue)),
                   error: widget.viewModel.lastNameError,
+                  controller: lastNameController,
+                ),
+                RegularButton(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  onTap: () => widget.viewModel.onCreateOwnerNextStep(
+                      UserModel((user) => user
+                        ..email = emailController.text
+                        ..phoneNumber = phoneNumberController.text
+                        ..firstName = firstNameController.text
+                        ..lastName = lastNameController.text),
+                      passwordController.text),
+                  text: localizations.nextStep.capitalize(),
                 ),
               ],
-            )),
-            RegularButton(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              onTap: () => widget.viewModel.onCreateOwnerNextStep(
-                  UserModel((user) => user
-                    ..email = email
-                    ..phoneNumber = phoneNumber
-                    ..firstName = firstName
-                    ..lastName = lastName),
-                  password),
-              // TODO: translate
-              text: localizations.nextStep.capitalize(),
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    phoneNumberController.dispose();
+    passwordController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    super.dispose();
   }
 }
