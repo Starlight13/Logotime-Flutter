@@ -10,9 +10,27 @@ class _$RegistrationState extends RegistrationState {
   @override
   final UserModel? owner;
   @override
-  final OrganisationSize? organisation;
+  final OrganisationSize? organisationSize;
   @override
-  final RulesModel? organisationRules;
+  final RulesModel organisationRules;
+  @override
+  final String? password;
+  @override
+  final String? emailError;
+  @override
+  final String? passwordError;
+  @override
+  final String? phoneNumberError;
+  @override
+  final String? firstNameError;
+  @override
+  final String? lastNameError;
+  @override
+  final String? organisationNameError;
+  @override
+  final String? organisationSizeError;
+  @override
+  final String? maxApplicationsError;
   @override
   final bool isLoading;
 
@@ -22,10 +40,21 @@ class _$RegistrationState extends RegistrationState {
 
   _$RegistrationState._(
       {this.owner,
-      this.organisation,
-      this.organisationRules,
+      this.organisationSize,
+      required this.organisationRules,
+      this.password,
+      this.emailError,
+      this.passwordError,
+      this.phoneNumberError,
+      this.firstNameError,
+      this.lastNameError,
+      this.organisationNameError,
+      this.organisationSizeError,
+      this.maxApplicationsError,
       required this.isLoading})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        organisationRules, r'RegistrationState', 'organisationRules');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'RegistrationState', 'isLoading');
   }
@@ -43,16 +72,45 @@ class _$RegistrationState extends RegistrationState {
     if (identical(other, this)) return true;
     return other is RegistrationState &&
         owner == other.owner &&
-        organisation == other.organisation &&
+        organisationSize == other.organisationSize &&
         organisationRules == other.organisationRules &&
+        password == other.password &&
+        emailError == other.emailError &&
+        passwordError == other.passwordError &&
+        phoneNumberError == other.phoneNumberError &&
+        firstNameError == other.firstNameError &&
+        lastNameError == other.lastNameError &&
+        organisationNameError == other.organisationNameError &&
+        organisationSizeError == other.organisationSizeError &&
+        maxApplicationsError == other.maxApplicationsError &&
         isLoading == other.isLoading;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, owner.hashCode), organisation.hashCode),
-            organisationRules.hashCode),
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc(
+                                                $jc($jc(0, owner.hashCode),
+                                                    organisationSize.hashCode),
+                                                organisationRules.hashCode),
+                                            password.hashCode),
+                                        emailError.hashCode),
+                                    passwordError.hashCode),
+                                phoneNumberError.hashCode),
+                            firstNameError.hashCode),
+                        lastNameError.hashCode),
+                    organisationNameError.hashCode),
+                organisationSizeError.hashCode),
+            maxApplicationsError.hashCode),
         isLoading.hashCode));
   }
 
@@ -60,8 +118,17 @@ class _$RegistrationState extends RegistrationState {
   String toString() {
     return (newBuiltValueToStringHelper(r'RegistrationState')
           ..add('owner', owner)
-          ..add('organisation', organisation)
+          ..add('organisationSize', organisationSize)
           ..add('organisationRules', organisationRules)
+          ..add('password', password)
+          ..add('emailError', emailError)
+          ..add('passwordError', passwordError)
+          ..add('phoneNumberError', phoneNumberError)
+          ..add('firstNameError', firstNameError)
+          ..add('lastNameError', lastNameError)
+          ..add('organisationNameError', organisationNameError)
+          ..add('organisationSizeError', organisationSizeError)
+          ..add('maxApplicationsError', maxApplicationsError)
           ..add('isLoading', isLoading))
         .toString();
   }
@@ -75,16 +142,59 @@ class RegistrationStateBuilder
   UserModelBuilder get owner => _$this._owner ??= new UserModelBuilder();
   set owner(UserModelBuilder? owner) => _$this._owner = owner;
 
-  OrganisationSize? _organisation;
-  OrganisationSize? get organisation => _$this._organisation;
-  set organisation(OrganisationSize? organisation) =>
-      _$this._organisation = organisation;
+  OrganisationSize? _organisationSize;
+  OrganisationSize? get organisationSize => _$this._organisationSize;
+  set organisationSize(OrganisationSize? organisationSize) =>
+      _$this._organisationSize = organisationSize;
 
   RulesModelBuilder? _organisationRules;
   RulesModelBuilder get organisationRules =>
       _$this._organisationRules ??= new RulesModelBuilder();
   set organisationRules(RulesModelBuilder? organisationRules) =>
       _$this._organisationRules = organisationRules;
+
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
+
+  String? _emailError;
+  String? get emailError => _$this._emailError;
+  set emailError(String? emailError) => _$this._emailError = emailError;
+
+  String? _passwordError;
+  String? get passwordError => _$this._passwordError;
+  set passwordError(String? passwordError) =>
+      _$this._passwordError = passwordError;
+
+  String? _phoneNumberError;
+  String? get phoneNumberError => _$this._phoneNumberError;
+  set phoneNumberError(String? phoneNumberError) =>
+      _$this._phoneNumberError = phoneNumberError;
+
+  String? _firstNameError;
+  String? get firstNameError => _$this._firstNameError;
+  set firstNameError(String? firstNameError) =>
+      _$this._firstNameError = firstNameError;
+
+  String? _lastNameError;
+  String? get lastNameError => _$this._lastNameError;
+  set lastNameError(String? lastNameError) =>
+      _$this._lastNameError = lastNameError;
+
+  String? _organisationNameError;
+  String? get organisationNameError => _$this._organisationNameError;
+  set organisationNameError(String? organisationNameError) =>
+      _$this._organisationNameError = organisationNameError;
+
+  String? _organisationSizeError;
+  String? get organisationSizeError => _$this._organisationSizeError;
+  set organisationSizeError(String? organisationSizeError) =>
+      _$this._organisationSizeError = organisationSizeError;
+
+  String? _maxApplicationsError;
+  String? get maxApplicationsError => _$this._maxApplicationsError;
+  set maxApplicationsError(String? maxApplicationsError) =>
+      _$this._maxApplicationsError = maxApplicationsError;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -96,8 +206,17 @@ class RegistrationStateBuilder
     final $v = _$v;
     if ($v != null) {
       _owner = $v.owner?.toBuilder();
-      _organisation = $v.organisation;
-      _organisationRules = $v.organisationRules?.toBuilder();
+      _organisationSize = $v.organisationSize;
+      _organisationRules = $v.organisationRules.toBuilder();
+      _password = $v.password;
+      _emailError = $v.emailError;
+      _passwordError = $v.passwordError;
+      _phoneNumberError = $v.phoneNumberError;
+      _firstNameError = $v.firstNameError;
+      _lastNameError = $v.lastNameError;
+      _organisationNameError = $v.organisationNameError;
+      _organisationSizeError = $v.organisationSizeError;
+      _maxApplicationsError = $v.maxApplicationsError;
       _isLoading = $v.isLoading;
       _$v = null;
     }
@@ -124,8 +243,17 @@ class RegistrationStateBuilder
       _$result = _$v ??
           new _$RegistrationState._(
               owner: _owner?.build(),
-              organisation: organisation,
-              organisationRules: _organisationRules?.build(),
+              organisationSize: organisationSize,
+              organisationRules: organisationRules.build(),
+              password: password,
+              emailError: emailError,
+              passwordError: passwordError,
+              phoneNumberError: phoneNumberError,
+              firstNameError: firstNameError,
+              lastNameError: lastNameError,
+              organisationNameError: organisationNameError,
+              organisationSizeError: organisationSizeError,
+              maxApplicationsError: maxApplicationsError,
               isLoading: BuiltValueNullFieldError.checkNotNull(
                   isLoading, r'RegistrationState', 'isLoading'));
     } catch (_) {
@@ -135,7 +263,7 @@ class RegistrationStateBuilder
         _owner?.build();
 
         _$failedField = 'organisationRules';
-        _organisationRules?.build();
+        organisationRules.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'RegistrationState', _$failedField, e.toString());

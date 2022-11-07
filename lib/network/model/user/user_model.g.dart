@@ -17,40 +17,25 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
   @override
   Iterable<Object?> serialize(Serializers serializers, UserModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
+    final result = <Object?>[
+      'lastName',
+      serializers.serialize(object.lastName,
+          specifiedType: const FullType(String)),
+      'firstName',
+      serializers.serialize(object.firstName,
+          specifiedType: const FullType(String)),
+      'email',
+      serializers.serialize(object.email,
+          specifiedType: const FullType(String)),
+      'phoneNumber',
+      serializers.serialize(object.phoneNumber,
+          specifiedType: const FullType(String)),
+    ];
     Object? value;
     value = object.id;
     if (value != null) {
       result
         ..add('id')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.lastName;
-    if (value != null) {
-      result
-        ..add('lastName')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.firstName;
-    if (value != null) {
-      result
-        ..add('firstName')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.email;
-    if (value != null) {
-      result
-        ..add('email')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.phoneNumber;
-    if (value != null) {
-      result
-        ..add('phoneNumber')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -102,19 +87,19 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
           break;
         case 'lastName':
           result.lastName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'firstName':
           result.firstName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'email':
           result.email = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'phoneNumber':
           result.phoneNumber = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'organizationId':
           result.organizationId = serializers.deserialize(value,
@@ -143,13 +128,13 @@ class _$UserModel extends UserModel {
   @override
   final String? id;
   @override
-  final String? lastName;
+  final String lastName;
   @override
-  final String? firstName;
+  final String firstName;
   @override
-  final String? email;
+  final String email;
   @override
-  final String? phoneNumber;
+  final String phoneNumber;
   @override
   final String? organizationId;
   @override
@@ -164,15 +149,21 @@ class _$UserModel extends UserModel {
 
   _$UserModel._(
       {this.id,
-      this.lastName,
-      this.firstName,
-      this.email,
-      this.phoneNumber,
+      required this.lastName,
+      required this.firstName,
+      required this.email,
+      required this.phoneNumber,
       this.organizationId,
       this.creationDate,
       this.isActive,
       this.userRole})
-      : super._();
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(lastName, r'UserModel', 'lastName');
+    BuiltValueNullFieldError.checkNotNull(firstName, r'UserModel', 'firstName');
+    BuiltValueNullFieldError.checkNotNull(email, r'UserModel', 'email');
+    BuiltValueNullFieldError.checkNotNull(
+        phoneNumber, r'UserModel', 'phoneNumber');
+  }
 
   @override
   UserModel rebuild(void Function(UserModelBuilder) updates) =>
@@ -308,10 +299,14 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
     final _$result = _$v ??
         new _$UserModel._(
             id: id,
-            lastName: lastName,
-            firstName: firstName,
-            email: email,
-            phoneNumber: phoneNumber,
+            lastName: BuiltValueNullFieldError.checkNotNull(
+                lastName, r'UserModel', 'lastName'),
+            firstName: BuiltValueNullFieldError.checkNotNull(
+                firstName, r'UserModel', 'firstName'),
+            email: BuiltValueNullFieldError.checkNotNull(
+                email, r'UserModel', 'email'),
+            phoneNumber: BuiltValueNullFieldError.checkNotNull(
+                phoneNumber, r'UserModel', 'phoneNumber'),
             organizationId: organizationId,
             creationDate: creationDate,
             isActive: isActive,

@@ -7,15 +7,15 @@ part of 'organisation_size.dart';
 // **************************************************************************
 
 const OrganisationSize _$small = const OrganisationSize._('small');
-const OrganisationSize _$middle = const OrganisationSize._('middle');
+const OrganisationSize _$medium = const OrganisationSize._('medium');
 const OrganisationSize _$large = const OrganisationSize._('large');
 
 OrganisationSize _$valueOf(String name) {
   switch (name) {
     case 'small':
       return _$small;
-    case 'middle':
-      return _$middle;
+    case 'medium':
+      return _$medium;
     case 'large':
       return _$large;
     default:
@@ -26,7 +26,7 @@ OrganisationSize _$valueOf(String name) {
 final BuiltSet<OrganisationSize> _$values =
     new BuiltSet<OrganisationSize>(const <OrganisationSize>[
   _$small,
-  _$middle,
+  _$medium,
   _$large,
 ]);
 
@@ -37,12 +37,12 @@ class _$OrganisationSizeSerializer
     implements PrimitiveSerializer<OrganisationSize> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'small': 'SMALL',
-    'middle': 'MIDDLE',
+    'medium': 'MIDDLE',
     'large': 'LARGE',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'SMALL': 'small',
-    'MIDDLE': 'middle',
+    'MIDDLE': 'medium',
     'LARGE': 'large',
   };
 

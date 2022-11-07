@@ -19,14 +19,16 @@ abstract class PageConnector<V, B extends ViewModelConverter<V>>
       },
       distinct: true,
       converter: (store) {
-        final converter = prepareConverter(context, store);
+        final converter =
+            prepareConverter(context, store.state, store.dispatch);
         return converter.build();
       },
       builder: buildWidget,
     );
   }
 
-  B prepareConverter(BuildContext context, Store store);
+  B prepareConverter(
+      BuildContext context, AppState state, Function(dynamic) dispatch);
 
   Widget buildWidget(BuildContext context, V viewModel);
 

@@ -2,19 +2,18 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:logotime/network/model/organisation/organisation_size.dart';
 import 'package:logotime/network/model/rules/rules_model.dart';
-import 'package:logotime/network/model/user/user_model.dart';
 import 'package:logotime/network/serializers.dart';
 part 'organisation_model.g.dart';
 
 abstract class OrganisationModel
     implements Built<OrganisationModel, OrganisationModelBuilder> {
-  String get name;
+  String? get id;
 
-  OrganisationSize get organizationSize;
+  String? get name;
 
-  UserModel get user;
+  OrganisationSize? get organizationSize;
 
-  RulesModel get rules;
+  RulesModel? get rules;
 
   OrganisationModel._();
 
