@@ -77,9 +77,8 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: _organisationSizeButtons(),
                 ),
-                Visibility(
-                  visible: widget.viewModel.organisationSizeError != null,
-                  child: Padding(
+                if (widget.viewModel.organisationSizeError != null)
+                  Padding(
                     padding: const EdgeInsets.only(top: 10.0, left: 12.0),
                     child: Text(
                       widget.viewModel.organisationSizeError ?? '',
@@ -89,7 +88,6 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
                       ),
                     ),
                   ),
-                ),
                 const SizedBox(
                   height: 20.0,
                 ),
