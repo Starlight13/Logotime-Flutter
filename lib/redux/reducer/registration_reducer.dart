@@ -21,6 +21,7 @@ Reducer<RegistrationState> get registrationReducer {
     TypedReducer(_organisationSizeErrorChanged),
     TypedReducer(_maxApplicationsErrorChanged),
     TypedReducer(_registrationCanceled),
+    TypedReducer(_organisationInfoValidationSucceeded),
   ]);
 }
 
@@ -51,9 +52,7 @@ RegistrationState _ownerInfoChanged(
   OwnerInfoValidationSucceeded action,
 ) {
   return oldState.rebuild(
-    ((state) => state
-      ..owner = action.ownerInfo.toBuilder()
-      ..password = action.password),
+    ((state) => state..owner = action.ownerInfo.toBuilder()),
   );
 }
 
@@ -196,6 +195,18 @@ RegistrationState _maxApplicationsErrorChanged(
 }
 
 RegistrationState _registrationCanceled(
-    RegistrationState oldState, CancelRegistrationAction action) {
+  RegistrationState oldState,
+  CancelRegistrationAction action,
+) {
   return RegistrationState.initial();
+}
+
+RegistrationState _organisationInfoValidationSucceeded(
+  RegistrationState oldState,
+  OrganisationInfoValidationSucceededAction action,
+) {
+  return oldState.rebuild((state) => state
+    ..organisationName = action.organisationName
+    ..organisationSize = action.organisationSize
+    ..organisationRules.maxApplications = action.maxApplications);
 }

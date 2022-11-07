@@ -34,10 +34,9 @@ class CreateOwnerConverter implements ViewModelConverter<CreateOwnerViewModel> {
       ..lastNameError = lastNameError));
   }
 
-  void _createOwner(UserModel userModel, String password) {
+  void _createOwner(UserModel userModel) {
     dispatch(OwnerInfoEnteredAction(
       ownerInfo: userModel,
-      password: password,
     ));
   }
 

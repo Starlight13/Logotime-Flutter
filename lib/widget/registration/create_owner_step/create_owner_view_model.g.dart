@@ -8,7 +8,7 @@ part of 'create_owner_view_model.dart';
 
 class _$CreateOwnerViewModel extends CreateOwnerViewModel {
   @override
-  final Function(UserModel, String) onCreateOwnerNextStep;
+  final Function(UserModel) onCreateOwnerNextStep;
   @override
   final Function() onBackButtonPress;
   @override
@@ -98,11 +98,10 @@ class CreateOwnerViewModelBuilder
     implements Builder<CreateOwnerViewModel, CreateOwnerViewModelBuilder> {
   _$CreateOwnerViewModel? _$v;
 
-  Function(UserModel, String)? _onCreateOwnerNextStep;
-  Function(UserModel, String)? get onCreateOwnerNextStep =>
+  Function(UserModel)? _onCreateOwnerNextStep;
+  Function(UserModel)? get onCreateOwnerNextStep =>
       _$this._onCreateOwnerNextStep;
-  set onCreateOwnerNextStep(
-          Function(UserModel, String)? onCreateOwnerNextStep) =>
+  set onCreateOwnerNextStep(Function(UserModel)? onCreateOwnerNextStep) =>
       _$this._onCreateOwnerNextStep = onCreateOwnerNextStep;
 
   Function()? _onBackButtonPress;

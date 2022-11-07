@@ -14,7 +14,7 @@ class _$RegistrationState extends RegistrationState {
   @override
   final RulesModel organisationRules;
   @override
-  final String? password;
+  final String? organisationName;
   @override
   final String? emailError;
   @override
@@ -42,7 +42,7 @@ class _$RegistrationState extends RegistrationState {
       {this.owner,
       this.organisationSize,
       required this.organisationRules,
-      this.password,
+      this.organisationName,
       this.emailError,
       this.passwordError,
       this.phoneNumberError,
@@ -74,7 +74,7 @@ class _$RegistrationState extends RegistrationState {
         owner == other.owner &&
         organisationSize == other.organisationSize &&
         organisationRules == other.organisationRules &&
-        password == other.password &&
+        organisationName == other.organisationName &&
         emailError == other.emailError &&
         passwordError == other.passwordError &&
         phoneNumberError == other.phoneNumberError &&
@@ -102,7 +102,7 @@ class _$RegistrationState extends RegistrationState {
                                                 $jc($jc(0, owner.hashCode),
                                                     organisationSize.hashCode),
                                                 organisationRules.hashCode),
-                                            password.hashCode),
+                                            organisationName.hashCode),
                                         emailError.hashCode),
                                     passwordError.hashCode),
                                 phoneNumberError.hashCode),
@@ -120,7 +120,7 @@ class _$RegistrationState extends RegistrationState {
           ..add('owner', owner)
           ..add('organisationSize', organisationSize)
           ..add('organisationRules', organisationRules)
-          ..add('password', password)
+          ..add('organisationName', organisationName)
           ..add('emailError', emailError)
           ..add('passwordError', passwordError)
           ..add('phoneNumberError', phoneNumberError)
@@ -153,9 +153,10 @@ class RegistrationStateBuilder
   set organisationRules(RulesModelBuilder? organisationRules) =>
       _$this._organisationRules = organisationRules;
 
-  String? _password;
-  String? get password => _$this._password;
-  set password(String? password) => _$this._password = password;
+  String? _organisationName;
+  String? get organisationName => _$this._organisationName;
+  set organisationName(String? organisationName) =>
+      _$this._organisationName = organisationName;
 
   String? _emailError;
   String? get emailError => _$this._emailError;
@@ -208,7 +209,7 @@ class RegistrationStateBuilder
       _owner = $v.owner?.toBuilder();
       _organisationSize = $v.organisationSize;
       _organisationRules = $v.organisationRules.toBuilder();
-      _password = $v.password;
+      _organisationName = $v.organisationName;
       _emailError = $v.emailError;
       _passwordError = $v.passwordError;
       _phoneNumberError = $v.phoneNumberError;
@@ -245,7 +246,7 @@ class RegistrationStateBuilder
               owner: _owner?.build(),
               organisationSize: organisationSize,
               organisationRules: organisationRules.build(),
-              password: password,
+              organisationName: organisationName,
               emailError: emailError,
               passwordError: passwordError,
               phoneNumberError: phoneNumberError,

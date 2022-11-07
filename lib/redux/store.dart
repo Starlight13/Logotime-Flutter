@@ -1,4 +1,6 @@
 import 'package:logotime/middleware/navigation_middleware.dart';
+import 'package:logotime/middleware/organisation_middleware.dart';
+import 'package:logotime/middleware/snack_bar_middleware.dart';
 import 'package:logotime/middleware/validation_middleware.dart';
 import 'package:logotime/redux/reducer/registration_reducer.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
@@ -18,6 +20,8 @@ Store<AppState> initStore() {
       middleware: [
         NavigationMiddleware(navigationService: sl.get()),
         ValidationMiddleware(),
+        OrganisationMiddleware(organisationNetworkService: sl.get()),
+        SnackBarMiddleware(snackBarService: sl.get()),
         LoggingMiddleware.printer(),
       ]);
 }

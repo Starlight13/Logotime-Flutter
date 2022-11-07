@@ -16,7 +16,8 @@ class NavigationMiddleware extends BaseMiddleware {
       navigationService.pushNamed(RouteDirection.createOrganisationOwnerScreen);
     } else if (action is NavigateToCreateOrganisationAction) {
       navigationService.pushNamed(RouteDirection.createOrganisationScreen);
-    } else if (action is CancelRegistrationAction) {
+    } else if (action is CancelRegistrationAction ||
+        action is OrganisationCreatedAction) {
       navigationService.popUntil(RouteDirection.startScreen);
     }
   }

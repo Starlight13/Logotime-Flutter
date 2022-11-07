@@ -3,11 +3,9 @@ import 'package:logotime/redux/action/common/validation_failed_action.dart';
 
 class OwnerInfoEnteredAction {
   final UserModel ownerInfo;
-  final String password;
 
   const OwnerInfoEnteredAction({
     required this.ownerInfo,
-    required this.password,
   });
 }
 
@@ -33,12 +31,8 @@ class LastNameValidationFailedAction extends ValidationFailedAction {
 
 class OwnerInfoValidationSucceeded {
   final UserModel ownerInfo;
-  final String password;
 
-  const OwnerInfoValidationSucceeded({
-    required this.ownerInfo,
-    required this.password,
-  });
+  const OwnerInfoValidationSucceeded({required this.ownerInfo});
 }
 
 class CreateOwnerErrorsClearedAction {}

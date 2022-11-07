@@ -15,6 +15,7 @@ abstract class UserModel implements Built<UserModel, UserModelBuilder> {
   DateTime? get creationDate;
   bool? get isActive;
   UserRole? get userRole;
+  String? get password;
 
   UserModel._();
 

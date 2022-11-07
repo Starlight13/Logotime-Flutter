@@ -11,7 +11,7 @@ abstract class RegistrationState
   UserModel? get owner;
   OrganisationSize? get organisationSize;
   RulesModel get organisationRules;
-  String? get password;
+  String? get organisationName;
   String? get emailError;
   String? get passwordError;
   String? get phoneNumberError;
