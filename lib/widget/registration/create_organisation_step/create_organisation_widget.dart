@@ -103,7 +103,6 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
                   onChange: (value) =>
                       widget.viewModel.onSubstituteMeRuleChanged(
                     isAllowed: value,
-                    needApproval: true,
                   ),
                 ),
                 RollDownAnimatedSwitcher(
@@ -121,7 +120,6 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
                                 SubstituteMeRule.allowedWithApproval,
                             onChange: (value) =>
                                 widget.viewModel.onSubstituteMeRuleChanged(
-                              isAllowed: true,
                               needApproval: value,
                             ),
                           ),
@@ -141,7 +139,6 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
                   value: rules.swapShiftRule != SwapShiftRule.prohibited,
                   onChange: (value) => widget.viewModel.onSwapShiftRuleChanged(
                     isAllowed: value,
-                    needApproval: true,
                   ),
                 ),
                 RollDownAnimatedSwitcher(
@@ -159,7 +156,6 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
                                 SwapShiftRule.allowedWithApproval,
                             onChange: (value) =>
                                 widget.viewModel.onSwapShiftRuleChanged(
-                              isAllowed: true,
                               needApproval: value,
                             ),
                           ),
