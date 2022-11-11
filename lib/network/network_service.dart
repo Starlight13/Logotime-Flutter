@@ -23,7 +23,7 @@ class DioService {
     try {
       final response = await _dio.request(
         request.path,
-        options: Options(method: request.methodType.name.toUpperCase()),
+        options: Options(method: request.methodType.value),
         data: request.data?.toJson(),
       );
       return Success(response.data);

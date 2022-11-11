@@ -22,7 +22,7 @@ class OrganisationNetworkService implements IOrganisationNetworkService {
     return await _dio
         .makeRequest(NetworkRequest<CreateOrganisationRequestModel>(
       path: route,
-      methodType: HttpMethod.post,
+      methodType: HttpMethod.postMethod,
       data: createOrganisationRequestModel,
     ));
   }

@@ -1,4 +1,10 @@
-enum HttpMethod { get, post }
+enum HttpMethod {
+  getMethod('GET'),
+  postMethod('POST');
+
+  final String value;
+  const HttpMethod(this.value);
+}
 
 class NetworkRequest<T> {
   final String path;
