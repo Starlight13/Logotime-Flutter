@@ -5,7 +5,7 @@ part 'create_owner_view_model.g.dart';
 
 abstract class CreateOwnerViewModel
     implements Built<CreateOwnerViewModel, CreateOwnerViewModelBuilder> {
-  Function(UserModel, String) get onCreateOwnerNextStep;
+  Function(UserModel) get onCreateOwnerNextStep;
   Function() get onBackButtonPress;
   String? get emailError;
   String? get passwordError;

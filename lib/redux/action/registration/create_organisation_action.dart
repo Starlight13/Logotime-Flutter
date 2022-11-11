@@ -61,12 +61,12 @@ class MaxApplicationValidationFailedAction extends ValidationFailedAction {
   MaxApplicationValidationFailedAction({required super.error});
 }
 
-class OrganisationInfoValidationSucceeded {
+class OrganisationInfoValidationSucceededAction {
   final String organisationName;
   final OrganisationSize organisationSize;
   final int maxApplications;
 
-  OrganisationInfoValidationSucceeded({
+  OrganisationInfoValidationSucceededAction({
     required this.organisationName,
     required this.organisationSize,
     required this.maxApplications,
@@ -74,3 +74,7 @@ class OrganisationInfoValidationSucceeded {
 }
 
 class CreateOrganisationErrorsClearedAction {}
+
+class CreateOrganisationNetworkAction {}
+
+class OrganisationCreatedAction {}

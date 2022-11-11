@@ -8,6 +8,7 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(CheckInRule.serializer)
+      ..add(CreateOrganisationRequestModel.serializer)
       ..add(OrganisationModel.serializer)
       ..add(OrganisationSize.serializer)
       ..add(RulesModel.serializer)

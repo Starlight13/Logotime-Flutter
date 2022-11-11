@@ -67,6 +67,13 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(UserRole)));
     }
+    value = object.password;
+    if (value != null) {
+      result
+        ..add('password')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -117,6 +124,10 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
           result.userRole = serializers.deserialize(value,
               specifiedType: const FullType(UserRole)) as UserRole?;
           break;
+        case 'password':
+          result.password = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -143,6 +154,8 @@ class _$UserModel extends UserModel {
   final bool? isActive;
   @override
   final UserRole? userRole;
+  @override
+  final String? password;
 
   factory _$UserModel([void Function(UserModelBuilder)? updates]) =>
       (new UserModelBuilder()..update(updates))._build();
@@ -156,7 +169,8 @@ class _$UserModel extends UserModel {
       this.organizationId,
       this.creationDate,
       this.isActive,
-      this.userRole})
+      this.userRole,
+      this.password})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(lastName, r'UserModel', 'lastName');
     BuiltValueNullFieldError.checkNotNull(firstName, r'UserModel', 'firstName');
@@ -184,7 +198,8 @@ class _$UserModel extends UserModel {
         organizationId == other.organizationId &&
         creationDate == other.creationDate &&
         isActive == other.isActive &&
-        userRole == other.userRole;
+        userRole == other.userRole &&
+        password == other.password;
   }
 
   @override
@@ -195,14 +210,16 @@ class _$UserModel extends UserModel {
                 $jc(
                     $jc(
                         $jc(
-                            $jc($jc($jc(0, id.hashCode), lastName.hashCode),
-                                firstName.hashCode),
-                            email.hashCode),
-                        phoneNumber.hashCode),
-                    organizationId.hashCode),
-                creationDate.hashCode),
-            isActive.hashCode),
-        userRole.hashCode));
+                            $jc(
+                                $jc($jc($jc(0, id.hashCode), lastName.hashCode),
+                                    firstName.hashCode),
+                                email.hashCode),
+                            phoneNumber.hashCode),
+                        organizationId.hashCode),
+                    creationDate.hashCode),
+                isActive.hashCode),
+            userRole.hashCode),
+        password.hashCode));
   }
 
   @override
@@ -216,7 +233,8 @@ class _$UserModel extends UserModel {
           ..add('organizationId', organizationId)
           ..add('creationDate', creationDate)
           ..add('isActive', isActive)
-          ..add('userRole', userRole))
+          ..add('userRole', userRole)
+          ..add('password', password))
         .toString();
   }
 }
@@ -262,6 +280,10 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
   UserRole? get userRole => _$this._userRole;
   set userRole(UserRole? userRole) => _$this._userRole = userRole;
 
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
+
   UserModelBuilder();
 
   UserModelBuilder get _$this {
@@ -276,6 +298,7 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
       _creationDate = $v.creationDate;
       _isActive = $v.isActive;
       _userRole = $v.userRole;
+      _password = $v.password;
       _$v = null;
     }
     return this;
@@ -310,7 +333,8 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
             organizationId: organizationId,
             creationDate: creationDate,
             isActive: isActive,
-            userRole: userRole);
+            userRole: userRole,
+            password: password);
     replace(_$result);
     return _$result;
   }

@@ -33,7 +33,7 @@ class ValidationMiddleware extends BaseMiddleware {
         EmailValidationFailedAction(error: error ?? 'Invalid email'),
       );
     }
-    if (!_isPasswordValid(password: action.password)) {
+    if (!_isPasswordValid(password: action.ownerInfo.password)) {
       validationSuccess = false;
       dispatch(PasswordValidationFailedAction(error: error));
     }
@@ -68,7 +68,6 @@ class ValidationMiddleware extends BaseMiddleware {
     if (validationSuccess) {
       dispatch(OwnerInfoValidationSucceeded(
         ownerInfo: action.ownerInfo,
-        password: action.password,
       ));
       dispatch(NavigateToCreateOrganisationAction());
     }
@@ -94,7 +93,14 @@ class ValidationMiddleware extends BaseMiddleware {
       dispatch(MaxApplicationValidationFailedAction(error: error));
     }
     if (validationSuccess) {
-      dispatch(CancelRegistrationAction());
+      dispatch(
+        OrganisationInfoValidationSucceededAction(
+          maxApplications: int.parse(action.maxApplications!),
+          organisationName: action.organisationName!,
+          organisationSize: action.organisationSize!,
+        ),
+      );
+      dispatch(CreateOrganisationNetworkAction());
     }
   }
 
@@ -109,9 +115,9 @@ class ValidationMiddleware extends BaseMiddleware {
     ).hasMatch(email);
   }
 
-  bool _isPasswordValid({required String password}) {
+  bool _isPasswordValid({required String? password}) {
     error = null;
-    if (password.isEmpty) {
+    if (password == null || password.isEmpty) {
       error = 'Please, enter password';
     } else if (password.length < 8) {
       error = 'Password should be at least 8 characters long';

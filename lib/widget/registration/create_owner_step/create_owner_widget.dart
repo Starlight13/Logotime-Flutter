@@ -87,12 +87,13 @@ class _CreateOwnerWidgetState extends State<CreateOwnerWidget> {
                 RegularButton(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   onTap: () => widget.viewModel.onCreateOwnerNextStep(
-                      UserModel((user) => user
-                        ..email = emailController.text
-                        ..phoneNumber = phoneNumberController.text
-                        ..firstName = firstNameController.text
-                        ..lastName = lastNameController.text),
-                      passwordController.text),
+                    UserModel((user) => user
+                      ..email = emailController.text
+                      ..phoneNumber = phoneNumberController.text
+                      ..firstName = firstNameController.text
+                      ..lastName = lastNameController.text
+                      ..password = passwordController.text),
+                  ),
                   text: localizations.nextStep.capitalize(),
                 ),
               ],
