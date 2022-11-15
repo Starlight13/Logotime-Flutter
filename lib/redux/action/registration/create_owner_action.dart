@@ -9,24 +9,28 @@ class OwnerInfoEnteredAction {
   });
 }
 
-class EmailValidationFailedAction extends ValidationFailedAction {
-  EmailValidationFailedAction({required super.error});
+class EmailValidationFailedRegistrationAction extends ValidationFailedAction {
+  EmailValidationFailedRegistrationAction({required super.error});
 }
 
-class PasswordValidationFailedAction extends ValidationFailedAction {
-  PasswordValidationFailedAction({required super.error});
+class PasswordValidationFailedRegistrationAction
+    extends ValidationFailedAction {
+  PasswordValidationFailedRegistrationAction({required super.error});
 }
 
-class PhoneNumberValidationFailedAction extends ValidationFailedAction {
-  PhoneNumberValidationFailedAction({required super.error});
+class PhoneNumberValidationFailedRegistrationAction
+    extends ValidationFailedAction {
+  PhoneNumberValidationFailedRegistrationAction({required super.error});
 }
 
-class FirstNameValidationFailedAction extends ValidationFailedAction {
-  FirstNameValidationFailedAction({required super.error});
+class FirstNameValidationFailedRegistrationAction
+    extends ValidationFailedAction {
+  FirstNameValidationFailedRegistrationAction({required super.error});
 }
 
-class LastNameValidationFailedAction extends ValidationFailedAction {
-  LastNameValidationFailedAction({required super.error});
+class LastNameValidationFailedRegistrationAction
+    extends ValidationFailedAction {
+  LastNameValidationFailedRegistrationAction({required super.error});
 }
 
 class OwnerInfoValidationSucceeded {

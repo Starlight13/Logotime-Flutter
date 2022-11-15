@@ -17,12 +17,14 @@ class Success<T> extends INetworkResult<T> {
 class Failure<T> extends INetworkResult<T> {
   final String errorCode;
   final String message;
+  final int? statusCode;
 
-  Failure({required this.errorCode, required this.message});
+  Failure({required this.errorCode, required this.message, this.statusCode});
 
   Failure.fromJson(Map<String, dynamic> json)
       : errorCode = json['errorCode'],
-        message = json['message'];
+        message = json['message'],
+        statusCode = null;
 
   @override
   String toString() {

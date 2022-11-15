@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:logotime/service/navigation/route_definition_service.dart';
 
 abstract class INavigationService {
@@ -6,6 +7,11 @@ abstract class INavigationService {
   void popUntil(String routeName);
 
   void pushNamed(String routeName);
+
+  void pushNamedAndRemoveUntil(
+    String routeName,
+    bool Function(Route<dynamic> route) predicate,
+  );
 }
 
 class NavigationService extends INavigationService {
@@ -30,5 +36,14 @@ class NavigationService extends INavigationService {
   @override
   void pushNamed(String routeName) {
     routeDefinitionService.key.currentState?.pushNamed(routeName);
+  }
+
+  @override
+  void pushNamedAndRemoveUntil(
+    String routeName,
+    bool Function(Route<dynamic> route) predicate,
+  ) {
+    routeDefinitionService.key.currentState
+        ?.pushNamedAndRemoveUntil(routeName, predicate);
   }
 }

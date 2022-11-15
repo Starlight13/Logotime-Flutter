@@ -7,10 +7,10 @@ part 'user_model.g.dart';
 @BuiltValue(wireName: 'user')
 abstract class UserModel implements Built<UserModel, UserModelBuilder> {
   String? get id;
-  String get lastName;
-  String get firstName;
+  String? get lastName;
+  String? get firstName;
   String get email;
-  String get phoneNumber;
+  String? get phoneNumber;
   String? get organizationId;
   DateTime? get creationDate;
   bool? get isActive;

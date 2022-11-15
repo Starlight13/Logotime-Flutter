@@ -2,6 +2,8 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logotime/network/network_service.dart';
 import 'package:logotime/network/organisation/organisation_network_service.dart';
+import 'package:logotime/network/user/token/token_service.dart';
+import 'package:logotime/network/user/user_network_service.dart';
 import 'package:logotime/redux/store.dart';
 import 'package:logotime/service/navigation/navigation_service.dart';
 import 'package:logotime/service/navigation/route_definition_service.dart';
@@ -22,11 +24,18 @@ void initServiceLocator() {
     SnackBarService(snackBarDefinitionService: sl.get()),
   );
 
+  sl.registerSingleton<ITokenService>(TokenService());
   sl.registerSingleton<DioService>(
-    DioService(baseUrl: FlutterConfig.get('BASE_URL')),
+    DioService(
+      baseUrl: FlutterConfig.get('BASE_URL'),
+      tokenService: sl.get(),
+    ),
   );
   sl.registerSingleton<IOrganisationNetworkService>(
     OrganisationNetworkService(dio: sl.get()),
+  );
+  sl.registerSingleton<IUserNetworkService>(
+    UserNetworkService(dio: sl.get(), tokenService: sl.get()),
   );
 
   sl.registerSingleton<IStoreService>(StoreService(store: initStore()));

@@ -9,13 +9,24 @@ part of 'app_state.dart';
 class _$AppState extends AppState {
   @override
   final RegistrationState registrationState;
+  @override
+  final AuthorizationState authorizationState;
+  @override
+  final HomeState homeState;
 
   factory _$AppState([void Function(AppStateBuilder)? updates]) =>
       (new AppStateBuilder()..update(updates))._build();
 
-  _$AppState._({required this.registrationState}) : super._() {
+  _$AppState._(
+      {required this.registrationState,
+      required this.authorizationState,
+      required this.homeState})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         registrationState, r'AppState', 'registrationState');
+    BuiltValueNullFieldError.checkNotNull(
+        authorizationState, r'AppState', 'authorizationState');
+    BuiltValueNullFieldError.checkNotNull(homeState, r'AppState', 'homeState');
   }
 
   @override
@@ -28,18 +39,25 @@ class _$AppState extends AppState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AppState && registrationState == other.registrationState;
+    return other is AppState &&
+        registrationState == other.registrationState &&
+        authorizationState == other.authorizationState &&
+        homeState == other.homeState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, registrationState.hashCode));
+    return $jf($jc(
+        $jc($jc(0, registrationState.hashCode), authorizationState.hashCode),
+        homeState.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'AppState')
-          ..add('registrationState', registrationState))
+          ..add('registrationState', registrationState)
+          ..add('authorizationState', authorizationState)
+          ..add('homeState', homeState))
         .toString();
   }
 }
@@ -53,12 +71,25 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set registrationState(RegistrationStateBuilder? registrationState) =>
       _$this._registrationState = registrationState;
 
+  AuthorizationStateBuilder? _authorizationState;
+  AuthorizationStateBuilder get authorizationState =>
+      _$this._authorizationState ??= new AuthorizationStateBuilder();
+  set authorizationState(AuthorizationStateBuilder? authorizationState) =>
+      _$this._authorizationState = authorizationState;
+
+  HomeStateBuilder? _homeState;
+  HomeStateBuilder get homeState =>
+      _$this._homeState ??= new HomeStateBuilder();
+  set homeState(HomeStateBuilder? homeState) => _$this._homeState = homeState;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _registrationState = $v.registrationState.toBuilder();
+      _authorizationState = $v.authorizationState.toBuilder();
+      _homeState = $v.homeState.toBuilder();
       _$v = null;
     }
     return this;
@@ -81,13 +112,20 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   _$AppState _build() {
     _$AppState _$result;
     try {
-      _$result =
-          _$v ?? new _$AppState._(registrationState: registrationState.build());
+      _$result = _$v ??
+          new _$AppState._(
+              registrationState: registrationState.build(),
+              authorizationState: authorizationState.build(),
+              homeState: homeState.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'registrationState';
         registrationState.build();
+        _$failedField = 'authorizationState';
+        authorizationState.build();
+        _$failedField = 'homeState';
+        homeState.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'AppState', _$failedField, e.toString());

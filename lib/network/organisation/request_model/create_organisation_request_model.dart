@@ -33,9 +33,7 @@ abstract class CreateOrganisationRequestModel
 
   @override
   String toJson() {
-    final ser = serializers.serializeWith(serializer, this);
-    final data = json.encode(ser);
-    return data;
+    return json.encode(serializers.serializeWith(serializer, this));
   }
 
   factory CreateOrganisationRequestModel.fromJson(Map<String, dynamic> json) {
