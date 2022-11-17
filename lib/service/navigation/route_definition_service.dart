@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logotime/connector/authorization/authorization_connector.dart';
+import 'package:logotime/connector/home/home_connector.dart';
 import 'package:logotime/connector/registration/create_organisation_connector.dart';
 import 'package:logotime/connector/registration/create_owner_connector.dart';
 import 'package:logotime/connector/start/start_connector.dart';
@@ -26,7 +28,17 @@ class RouteDefinitionService extends IRouteDefinitionService {
         );
       case RouteDirection.createOrganisationScreen:
         return MaterialPageRoute(
-          builder: ((context) => const CreateOrganisationConnector()),
+          builder: ((_) => const CreateOrganisationConnector()),
+          settings: settings,
+        );
+      case RouteDirection.logInScreen:
+        return MaterialPageRoute(
+          builder: ((_) => const AuthorizationConnector()),
+          settings: settings,
+        );
+      case RouteDirection.homeScreen:
+        return MaterialPageRoute(
+          builder: ((_) => const HomeConnector()),
           settings: settings,
         );
       default:

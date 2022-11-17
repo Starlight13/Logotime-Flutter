@@ -1,5 +1,6 @@
 {
   "allow": "allow",
+  "back": "back",
   "checkInRule": "check-in rule",
   "createOrganisation": "create organisation",
   "email": "e-mail",

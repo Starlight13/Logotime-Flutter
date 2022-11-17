@@ -58,7 +58,7 @@ RegistrationState _ownerInfoChanged(
 
 RegistrationState _emailErrorChanged(
   RegistrationState oldState,
-  EmailValidationFailedAction action,
+  EmailValidationFailedRegistrationAction action,
 ) {
   return oldState.rebuild(
     (state) => state.emailError = action.error,
@@ -67,7 +67,7 @@ RegistrationState _emailErrorChanged(
 
 RegistrationState _passwordErrorChanged(
   RegistrationState oldState,
-  PasswordValidationFailedAction action,
+  PasswordValidationFailedRegistrationAction action,
 ) {
   return oldState.rebuild(
     (state) => state.passwordError = action.error,
@@ -76,7 +76,7 @@ RegistrationState _passwordErrorChanged(
 
 RegistrationState _phoneNumberErrorChanged(
   RegistrationState oldState,
-  PhoneNumberValidationFailedAction action,
+  PhoneNumberValidationFailedRegistrationAction action,
 ) {
   return oldState.rebuild(
     (state) => state.phoneNumberError = action.error,
@@ -85,7 +85,7 @@ RegistrationState _phoneNumberErrorChanged(
 
 RegistrationState _firstNameErrorChanged(
   RegistrationState oldState,
-  FirstNameValidationFailedAction action,
+  FirstNameValidationFailedRegistrationAction action,
 ) {
   return oldState.rebuild(
     (state) => state.firstNameError = action.error,
@@ -94,7 +94,7 @@ RegistrationState _firstNameErrorChanged(
 
 RegistrationState _lastNameErrorChanged(
   RegistrationState oldState,
-  LastNameValidationFailedAction action,
+  LastNameValidationFailedRegistrationAction action,
 ) {
   return oldState.rebuild(
     (state) => state.lastNameError = action.error,

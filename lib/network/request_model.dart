@@ -1,4 +1,10 @@
 abstract class RequestModel {
   String toJson();
-  RequestModel.fromJson();
+}
+
+class EmptyRequestModel extends RequestModel {
+  @override
+  String toJson() {
+    return '';
+  }
 }

@@ -9,10 +9,12 @@ class StartConverter extends ViewModelConverter<StartViewModel> {
 
   @override
   StartViewModel build() {
-    return StartViewModel(((p0) => p0
-      ..onLogInPressed = (() => {})
-      ..onCreateOrganisationPressed = (() {
-        dispatch(NavigateToCreateOwnerAction());
-      })));
+    return StartViewModel(
+      (viewModel) => viewModel
+        ..onLogInPressed = (() => dispatch(NavigateToLogInAction()))
+        ..onCreateOrganisationPressed = (() {
+          dispatch(NavigateToCreateOwnerAction());
+        }),
+    );
   }
 }

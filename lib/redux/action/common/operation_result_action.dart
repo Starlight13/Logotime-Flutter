@@ -9,5 +9,6 @@ class OperationSuccessAction extends OperationResultAction {
 }
 
 class OperationFailureAction extends OperationResultAction {
-  OperationFailureAction({required super.message});
+  final int? statusCode;
+  OperationFailureAction({required super.message, required this.statusCode});
 }

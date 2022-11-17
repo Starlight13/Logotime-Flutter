@@ -1,6 +1,7 @@
 import 'package:logotime/extensions.dart';
 import 'package:logotime/middleware/base_middleware.dart';
 import 'package:logotime/network/model/organisation/organisation_size.dart';
+import 'package:logotime/redux/action/user/authorization_action.dart';
 import 'package:logotime/redux/action/navigation_action.dart';
 import 'package:logotime/redux/action/registration_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
@@ -13,10 +14,14 @@ class ValidationMiddleware extends BaseMiddleware {
   void process(action, AppState state, Function(dynamic action) dispatch) {
     if (action is OwnerInfoEnteredAction) {
       _validateOwnerInfo(action, state, dispatch);
-    } else if (action is CreateOrganisationAction) {
+    } else if (action is ValidateOrganisationInfo) {
       _validateOrganisationInfo(action, state, dispatch);
     } else if (action is CancelRegistrationAction) {
       dispatch(CreateOwnerErrorsClearedAction());
+    } else if (action is ValidateLogInInfoAction) {
+      _validateLogInInfo(action, state, dispatch);
+    } else if (action is CancelLogInAction) {
+      dispatch(LogInErrorsClearedAction());
     }
   }
 
@@ -30,17 +35,18 @@ class ValidationMiddleware extends BaseMiddleware {
     if (!_isEmailValid(email: action.ownerInfo.email)) {
       validationSuccess = false;
       dispatch(
-        EmailValidationFailedAction(error: error ?? 'Invalid email'),
+        EmailValidationFailedRegistrationAction(
+            error: error ?? 'Invalid email'),
       );
     }
     if (!_isPasswordValid(password: action.ownerInfo.password)) {
       validationSuccess = false;
-      dispatch(PasswordValidationFailedAction(error: error));
+      dispatch(PasswordValidationFailedRegistrationAction(error: error));
     }
     if (!_isPhoneNumberValid(phoneNumber: action.ownerInfo.phoneNumber)) {
       validationSuccess = false;
       dispatch(
-        PhoneNumberValidationFailedAction(
+        PhoneNumberValidationFailedRegistrationAction(
           error: error ?? 'Invalid phone number',
         ),
       );
@@ -48,7 +54,7 @@ class ValidationMiddleware extends BaseMiddleware {
     if (!_isPhoneNumberValid(phoneNumber: action.ownerInfo.phoneNumber)) {
       validationSuccess = false;
       dispatch(
-        PhoneNumberValidationFailedAction(
+        PhoneNumberValidationFailedRegistrationAction(
           error: error ?? 'Invalid phone number',
         ),
       );
@@ -56,13 +62,15 @@ class ValidationMiddleware extends BaseMiddleware {
     if (!_isFirstNameValid(firstName: action.ownerInfo.firstName)) {
       validationSuccess = false;
       dispatch(
-        FirstNameValidationFailedAction(error: error ?? 'Invalid name'),
+        FirstNameValidationFailedRegistrationAction(
+            error: error ?? 'Invalid name'),
       );
     }
     if (!_isLastNameValid(lastName: action.ownerInfo.lastName)) {
       validationSuccess = false;
       dispatch(
-        LastNameValidationFailedAction(error: error ?? 'Invalid name'),
+        LastNameValidationFailedRegistrationAction(
+            error: error ?? 'Invalid name'),
       );
     }
     if (validationSuccess) {
@@ -74,7 +82,7 @@ class ValidationMiddleware extends BaseMiddleware {
   }
 
   void _validateOrganisationInfo(
-    CreateOrganisationAction action,
+    ValidateOrganisationInfo action,
     AppState state,
     Function(dynamic action) dispatch,
   ) {
@@ -101,6 +109,30 @@ class ValidationMiddleware extends BaseMiddleware {
         ),
       );
       dispatch(CreateOrganisationNetworkAction());
+    }
+  }
+
+  void _validateLogInInfo(ValidateLogInInfoAction action, AppState state,
+      Function(dynamic) dispatch) {
+    dispatch(LogInErrorsClearedAction());
+    bool validationSuccess = true;
+    if (!_isEmailValid(email: action.email)) {
+      validationSuccess = false;
+      dispatch(EmailValidationFailedAuthorizationAction(error: error));
+    }
+    if (action.password.isEmpty) {
+      validationSuccess = false;
+      dispatch(PasswordValidationFailedAuthorizationAction(
+          error: 'Please enter password'));
+    }
+    if (validationSuccess) {
+      dispatch(
+        LogInValidationSuccessAction(
+          email: action.email,
+          password: action.password,
+        ),
+      );
+      dispatch(LogInNetworkAction());
     }
   }
 
@@ -133,9 +165,9 @@ class ValidationMiddleware extends BaseMiddleware {
     return false;
   }
 
-  bool _isPhoneNumberValid({required String phoneNumber}) {
+  bool _isPhoneNumberValid({required String? phoneNumber}) {
     error = null;
-    if (phoneNumber.isEmpty) {
+    if (phoneNumber == null || phoneNumber.isEmpty) {
       error = 'Please, enter phone number';
       return false;
     }
@@ -143,18 +175,18 @@ class ValidationMiddleware extends BaseMiddleware {
         RegExp(r"^\d{10}$").hasMatch(phoneNumber);
   }
 
-  bool _isFirstNameValid({required String firstName}) {
+  bool _isFirstNameValid({required String? firstName}) {
     error = null;
-    if (firstName.isEmpty) {
+    if (firstName == null || firstName.isEmpty) {
       error = 'Please, enter first name';
       return false;
     }
     return true;
   }
 
-  bool _isLastNameValid({required String lastName}) {
+  bool _isLastNameValid({required String? lastName}) {
     error = null;
-    if (lastName.isEmpty) {
+    if (lastName == null || lastName.isEmpty) {
       error = 'Please, enter first name';
       return false;
     }

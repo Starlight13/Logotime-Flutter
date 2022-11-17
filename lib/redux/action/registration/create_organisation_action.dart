@@ -37,12 +37,12 @@ class UnassignedShiftRuleChangedAction {
   UnassignedShiftRuleChangedAction({required this.isAllowed});
 }
 
-class CreateOrganisationAction {
+class ValidateOrganisationInfo {
   final String? organisationName;
   final OrganisationSize? organisationSize;
   final String? maxApplications;
 
-  CreateOrganisationAction({
+  ValidateOrganisationInfo({
     required this.organisationName,
     required this.organisationSize,
     required this.maxApplications,

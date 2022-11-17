@@ -74,7 +74,7 @@ class CreateOrganisationConverter
     String? maxApplications,
   }) {
     dispatch(
-      CreateOrganisationAction(
+      ValidateOrganisationInfo(
         organisationName: organisationName,
         organisationSize: organisationSize,
         maxApplications: maxApplications,

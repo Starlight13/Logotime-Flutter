@@ -14,12 +14,14 @@ class OrganisationMiddleware extends BaseMiddleware {
   @override
   void process(action, AppState state, Function(dynamic action) dispatch) {
     if (action is CreateOrganisationNetworkAction) {
-      _createOrganisation(action, state.registrationState, dispatch);
+      _createOrganisation(state.registrationState, dispatch);
     }
   }
 
   void _createOrganisation(
-      action, RegistrationState state, Function(dynamic action) dispatch) {
+    RegistrationState state,
+    Function(dynamic action) dispatch,
+  ) {
     organisationNetworkService
         .createOrganisation(
           CreateOrganisationRequestModel((model) => model
@@ -35,9 +37,14 @@ class OrganisationMiddleware extends BaseMiddleware {
               //TODO: translate message
               dispatch(OperationSuccessAction(message: 'Organisation created'));
             },
-            (failure) => dispatch(
-              OperationFailureAction(message: failure.message),
-            ),
+            (failure) {
+              dispatch(
+                OperationFailureAction(
+                  message: failure.message,
+                  statusCode: failure.statusCode,
+                ),
+              );
+            },
           ),
         )
         .catchError((e, stacktrace) => null);

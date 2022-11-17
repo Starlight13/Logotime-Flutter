@@ -10,6 +10,7 @@ abstract class ISnackBarDefinitionService {
 class SnackBarDefinitionService extends ISnackBarDefinitionService {
   @override
   void showSnackBar(SnackBar snackBar) {
+    snackbarKey.currentState?.hideCurrentSnackBar();
     snackbarKey.currentState?.showSnackBar(snackBar);
   }
 }
