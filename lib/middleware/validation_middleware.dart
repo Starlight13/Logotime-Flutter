@@ -14,11 +14,11 @@ class ValidationMiddleware extends BaseMiddleware {
   void process(action, AppState state, Function(dynamic action) dispatch) {
     if (action is OwnerInfoEnteredAction) {
       _validateOwnerInfo(action, state, dispatch);
-    } else if (action is CreateOrganisationAction) {
+    } else if (action is ValidateOrganisationInfo) {
       _validateOrganisationInfo(action, state, dispatch);
     } else if (action is CancelRegistrationAction) {
       dispatch(CreateOwnerErrorsClearedAction());
-    } else if (action is LogInAction) {
+    } else if (action is ValidateLogInInfoAction) {
       _validateLogInInfo(action, state, dispatch);
     } else if (action is CancelLogInAction) {
       dispatch(LogInErrorsClearedAction());
@@ -82,7 +82,7 @@ class ValidationMiddleware extends BaseMiddleware {
   }
 
   void _validateOrganisationInfo(
-    CreateOrganisationAction action,
+    ValidateOrganisationInfo action,
     AppState state,
     Function(dynamic action) dispatch,
   ) {
@@ -112,8 +112,8 @@ class ValidationMiddleware extends BaseMiddleware {
     }
   }
 
-  void _validateLogInInfo(
-      LogInAction action, AppState state, Function(dynamic) dispatch) {
+  void _validateLogInInfo(ValidateLogInInfoAction action, AppState state,
+      Function(dynamic) dispatch) {
     dispatch(LogInErrorsClearedAction());
     bool validationSuccess = true;
     if (!_isEmailValid(email: action.email)) {

@@ -1,10 +1,10 @@
 import 'package:logotime/redux/action/common/validation_failed_action.dart';
 
-class LogInAction {
+class ValidateLogInInfoAction {
   final String email;
   final String password;
 
-  LogInAction({
+  ValidateLogInInfoAction({
     required this.email,
     required this.password,
   });

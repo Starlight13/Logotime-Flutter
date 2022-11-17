@@ -21,7 +21,7 @@ class AuthorizationConverter
         ..emailError = emailError
         ..passwordError = passwordError
         ..onLogInPressed = (({email, password}) => dispatch(
-              LogInAction(
+              ValidateLogInInfoAction(
                 email: email!,
                 password: password!,
               ),

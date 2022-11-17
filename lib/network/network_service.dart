@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -33,7 +36,7 @@ class DioService {
         return handler.next(options);
       },
       onError: (e, handler) async {
-        if (e.response?.statusCode == 401 &&
+        if (e.response?.statusCode == HttpStatus.unauthorized &&
             (_tokenService.isExpired ?? false) &&
             !_isRefreshingToken) {
           await _refreshToken();
@@ -53,6 +56,8 @@ class DioService {
     try {
       final response = await _dio.get('/user/refresh_token');
       setToken(response.data['token']);
+    } on DioError catch (e) {
+      log(e.message);
     } finally {
       _isRefreshingToken = false;
     }
@@ -100,8 +105,9 @@ class DioService {
     } else {
       return Failure(
         errorCode: 'setting_request_error',
-        message:
-            e.response?.statusCode == 401 ? 'Log in again please' : e.message,
+        message: e.response?.statusCode == HttpStatus.unauthorized
+            ? 'Log in again please'
+            : e.message,
         statusCode: e.response?.statusCode,
       );
     }
