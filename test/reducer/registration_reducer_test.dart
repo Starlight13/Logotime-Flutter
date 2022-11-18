@@ -7,8 +7,6 @@ import 'package:logotime/redux/reducer/registration_reducer.dart';
 import 'package:logotime/redux/state/registration/registration_state.dart';
 
 void main() {
-  //TODO: test change rules actions
-
   test('Registration Reducer - clear owner related validation errors', () {
     //Arrange
     final initialState = RegistrationState.initial();
