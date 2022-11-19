@@ -1,8 +1,6 @@
-import 'package:built_value/built_value.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logotime/middleware/organisation_middleware.dart';
 import 'package:logotime/network/model/organisation/organisation_size.dart';
-import 'package:logotime/network/model/rules/rules_model.dart';
 import 'package:logotime/network/model/user/user_model.dart';
 import 'package:logotime/network/network_result.dart';
 import 'package:logotime/network/organisation/organisation_network_service.dart';
@@ -14,7 +12,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:redux/redux.dart';
 
-import '../../mock/next_dispatcher_mock.dart' as mock;
+import '../../mock/next_dispatcher_mock.dart';
 import 'organisation_middleware_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -25,12 +23,12 @@ void main() {
   late OrganisationMiddleware sut;
   late MockIOrganisationNetworkService organisationNetworkService;
   late Store<AppState> store;
-  late mock.NextDispatcher next;
+  late NextDispatcherMock next;
 
   setUp(() {
     organisationNetworkService = MockIOrganisationNetworkService();
     store = MockStore();
-    next = mock.NextDispatcherMock();
+    next = NextDispatcherMock();
     sut = OrganisationMiddleware(
         organisationNetworkService: organisationNetworkService);
 
