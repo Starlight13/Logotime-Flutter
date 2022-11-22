@@ -228,131 +228,123 @@ void main() {
     expect(state, RegistrationState.initial());
   });
 
-  group('Registration reducer - "Substitute me" rule changed', () {
-    final inputsToExpected = {
-      {'isAllowed': false, 'needApproval': false}: SubstituteMeRule.prohibited,
-      {'isAllowed': false, 'needApproval': true}: SubstituteMeRule.prohibited,
-      {'isAllowed': true, 'needApproval': false}: SubstituteMeRule.allowed,
-      {'isAllowed': true, 'needApproval': true}:
-          SubstituteMeRule.allowedWithApproval,
-    };
+  final substituteMeInputsToExpected = {
+    {'isAllowed': false, 'needApproval': false}: SubstituteMeRule.prohibited,
+    {'isAllowed': false, 'needApproval': true}: SubstituteMeRule.prohibited,
+    {'isAllowed': true, 'needApproval': false}: SubstituteMeRule.allowed,
+    {'isAllowed': true, 'needApproval': true}:
+        SubstituteMeRule.allowedWithApproval,
+  };
 
-    inputsToExpected.forEach((key, value) {
-      test(
-        'Registration reducer - "Substitute me" rule should be ${value.name}, '
-        'when isAllowed is ${key['isAllowed']!} '
-        'and needApproval is ${key['needApproval']!}',
-        () {
-          //Arrange
-          final initialState = RegistrationState.initial();
+  substituteMeInputsToExpected.forEach((key, value) {
+    test(
+      'Registration reducer - "Substitute me" rule should be ${value.name}, '
+      'when isAllowed is ${key['isAllowed']!} '
+      'and needApproval is ${key['needApproval']!}',
+      () {
+        //Arrange
+        final initialState = RegistrationState.initial();
 
-          //Act
-          final state = registrationReducer(
-            initialState,
-            SubstituteMeRuleChangedAction(
-              isAllowed: key['isAllowed']!,
-              needApproval: key['needApproval']!,
-            ),
-          );
+        //Act
+        final state = registrationReducer(
+          initialState,
+          SubstituteMeRuleChangedAction(
+            isAllowed: key['isAllowed']!,
+            needApproval: key['needApproval']!,
+          ),
+        );
 
-          //Assert
-          expect(state.organisationRules.substituteMeRule, value);
-        },
-      );
-    });
+        //Assert
+        expect(state.organisationRules.substituteMeRule, value);
+      },
+    );
   });
 
-  group('Registration reducer - "Swap shift" rule changed', () {
-    final inputsToExpected = {
-      {'isAllowed': false, 'needApproval': false}: SwapShiftRule.prohibited,
-      {'isAllowed': false, 'needApproval': true}: SwapShiftRule.prohibited,
-      {'isAllowed': true, 'needApproval': false}: SwapShiftRule.allowed,
-      {'isAllowed': true, 'needApproval': true}:
-          SwapShiftRule.allowedWithApproval,
-    };
+  final swapShiftInputsToExpected = {
+    {'isAllowed': false, 'needApproval': false}: SwapShiftRule.prohibited,
+    {'isAllowed': false, 'needApproval': true}: SwapShiftRule.prohibited,
+    {'isAllowed': true, 'needApproval': false}: SwapShiftRule.allowed,
+    {'isAllowed': true, 'needApproval': true}:
+        SwapShiftRule.allowedWithApproval,
+  };
 
-    inputsToExpected.forEach((key, value) {
-      test(
-        'Registration reducer - "Swap shift" rule should be ${value.name}, '
-        'when isAllowed is ${key['isAllowed']!} '
-        'and needApproval is ${key['needApproval']!}',
-        () {
-          //Arrange
-          final initialState = RegistrationState.initial();
+  swapShiftInputsToExpected.forEach((key, value) {
+    test(
+      'Registration reducer - "Swap shift" rule should be ${value.name}, '
+      'when isAllowed is ${key['isAllowed']!} '
+      'and needApproval is ${key['needApproval']!}',
+      () {
+        //Arrange
+        final initialState = RegistrationState.initial();
 
-          //Act
-          final state = registrationReducer(
-            initialState,
-            SwapShiftRuleChangedAction(
-              isAllowed: key['isAllowed']!,
-              needApproval: key['needApproval']!,
-            ),
-          );
+        //Act
+        final state = registrationReducer(
+          initialState,
+          SwapShiftRuleChangedAction(
+            isAllowed: key['isAllowed']!,
+            needApproval: key['needApproval']!,
+          ),
+        );
 
-          //Assert
-          expect(state.organisationRules.swapShiftRule, value);
-        },
-      );
-    });
+        //Assert
+        expect(state.organisationRules.swapShiftRule, value);
+      },
+    );
   });
 
-  group('Registration reducer - "Check in" rule changed', () {
-    final inputsToExpected = {
-      {'geoRequired': false, 'photoRequired': false}: CheckInRule.button,
-      {'geoRequired': false, 'photoRequired': true}: CheckInRule.photo,
-      {'geoRequired': true, 'photoRequired': false}: CheckInRule.geo,
-      {'geoRequired': true, 'photoRequired': true}: CheckInRule.geoAndPhoto,
-    };
+  final checkInInputsToExpected = {
+    {'geoRequired': false, 'photoRequired': false}: CheckInRule.button,
+    {'geoRequired': false, 'photoRequired': true}: CheckInRule.photo,
+    {'geoRequired': true, 'photoRequired': false}: CheckInRule.geo,
+    {'geoRequired': true, 'photoRequired': true}: CheckInRule.geoAndPhoto,
+  };
 
-    inputsToExpected.forEach((key, value) {
-      test(
-        'Registration reducer - "Check in" rule should be ${value.name}, '
-        'when geoRequired is ${key['geoRequired']!} '
-        'and photoRequired is ${key['photoRequired']!}',
-        () {
-          //Arrange
-          final initialState = RegistrationState.initial();
+  checkInInputsToExpected.forEach((key, value) {
+    test(
+      'Registration reducer - "Check in" rule should be ${value.name}, '
+      'when geoRequired is ${key['geoRequired']!} '
+      'and photoRequired is ${key['photoRequired']!}',
+      () {
+        //Arrange
+        final initialState = RegistrationState.initial();
 
-          //Act
-          final state = registrationReducer(
-            initialState,
-            CheckInRuleChangedAction(
-              geoRequired: key['geoRequired']!,
-              photoRequired: key['photoRequired']!,
-            ),
-          );
+        //Act
+        final state = registrationReducer(
+          initialState,
+          CheckInRuleChangedAction(
+            geoRequired: key['geoRequired']!,
+            photoRequired: key['photoRequired']!,
+          ),
+        );
 
-          //Assert
-          expect(state.organisationRules.checkInRule, value);
-        },
-      );
-    });
+        //Assert
+        expect(state.organisationRules.checkInRule, value);
+      },
+    );
   });
 
-  group('Registration reducer - "Unassigned shift" rule changed', () {
-    final inputsToExpected = {
-      false: UnassignedShiftRule.prohibited,
-      true: UnassignedShiftRule.allowed,
-    };
+  final unassignedInputsToExpected = {
+    false: UnassignedShiftRule.prohibited,
+    true: UnassignedShiftRule.allowed,
+  };
 
-    inputsToExpected.forEach((key, value) {
-      test(
-        'Registration reducer - "Unassigned shift" rule should be ${value.name}, '
-        'when isAllowed is $key',
-        () {
-          //Arrange
-          final initialState = RegistrationState.initial();
+  unassignedInputsToExpected.forEach((key, value) {
+    test(
+      'Registration reducer - "Unassigned shift" rule should be ${value.name}, '
+      'when isAllowed is $key',
+      () {
+        //Arrange
+        final initialState = RegistrationState.initial();
 
-          //Act
-          final state = registrationReducer(
-            initialState,
-            UnassignedShiftRuleChangedAction(isAllowed: key),
-          );
+        //Act
+        final state = registrationReducer(
+          initialState,
+          UnassignedShiftRuleChangedAction(isAllowed: key),
+        );
 
-          //Assert
-          expect(state.organisationRules.unassignedShiftRule, value);
-        },
-      );
-    });
+        //Assert
+        expect(state.organisationRules.unassignedShiftRule, value);
+      },
+    );
   });
 }

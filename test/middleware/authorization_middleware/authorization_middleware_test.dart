@@ -29,6 +29,7 @@ void main() {
     next = mock.NextDispatcherMock();
     store = MockStore();
     sut = AuthorizationMiddleware(userNetworkService: userNetworkService);
+    when(store.state).thenReturn(AppState.initial());
   });
 
   test('Authorization middleware - log in success', () async {
@@ -41,11 +42,6 @@ void main() {
     ).thenAnswer(
       (_) async => Success({}),
     );
-    when(store.state).thenReturn(AppState.initial().rebuild(
-      (state) => state.authorizationState
-        ..email = 'test@test.com'
-        ..password = 'Qwerty123',
-    ));
 
     //Act
     await sut(store, LogInNetworkAction(), next);
@@ -77,11 +73,6 @@ void main() {
     ).thenAnswer(
       (_) async => stubFailure,
     );
-    when(store.state).thenReturn(AppState.initial().rebuild(
-      (state) => state.authorizationState
-        ..email = 'test@test.com'
-        ..password = 'Qwerty123',
-    ));
 
     //Act
     await sut(store, LogInNetworkAction(), next);

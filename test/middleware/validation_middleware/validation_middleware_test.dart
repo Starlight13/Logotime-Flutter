@@ -76,60 +76,58 @@ void main() {
     ))).called(1);
   });
 
-  group('Validation middleware - owner info validation failed', () {
-    final fieldToExpected = {
-      'email': EmailValidationFailedRegistrationAction,
-      'password': PasswordValidationFailedRegistrationAction,
-      'phoneNumber': PhoneNumberValidationFailedRegistrationAction,
-      'firstName': FirstNameValidationFailedRegistrationAction,
-      'lastName': LastNameValidationFailedRegistrationAction,
-    };
+  final ownerFieldToExpected = {
+    'email': EmailValidationFailedRegistrationAction,
+    'password': PasswordValidationFailedRegistrationAction,
+    'phoneNumber': PhoneNumberValidationFailedRegistrationAction,
+    'firstName': FirstNameValidationFailedRegistrationAction,
+    'lastName': LastNameValidationFailedRegistrationAction,
+  };
 
-    final action = OwnerInfoEnteredAction(
-      ownerInfo: UserModel(
-        (user) => user
-          ..email = ''
-          ..password = ''
-          ..phoneNumber = ''
-          ..firstName = ''
-          ..lastName = '',
-      ),
-    );
+  final action = OwnerInfoEnteredAction(
+    ownerInfo: UserModel(
+      (user) => user
+        ..email = ''
+        ..password = ''
+        ..phoneNumber = ''
+        ..firstName = ''
+        ..lastName = '',
+    ),
+  );
 
-    fieldToExpected.forEach((key, value) {
-      test('$key validation failed', () {
-        //Arrange
-        const errorMessage = 'error';
-        when(
-          validationService.isEmailValid(email: anyNamed('email')),
-        ).thenReturn(key != 'email');
-        when(
-          validationService.isPasswordValid(password: anyNamed('password')),
-        ).thenReturn(key != 'password');
-        when(
-          validationService.isPhoneNumberValid(
-              phoneNumber: anyNamed('phoneNumber')),
-        ).thenReturn(key != 'phoneNumber');
-        when(
-          validationService.isFirstNameValid(firstName: anyNamed('firstName')),
-        ).thenReturn(key != 'firstName');
-        when(
-          validationService.isLastNameValid(lastName: anyNamed('lastName')),
-        ).thenReturn(key != 'lastName');
-        when(validationService.error).thenReturn(errorMessage);
+  ownerFieldToExpected.forEach((key, value) {
+    test('Validation middleware - owner $key validation failed', () {
+      //Arrange
+      const errorMessage = 'error';
+      when(
+        validationService.isEmailValid(email: anyNamed('email')),
+      ).thenReturn(key != 'email');
+      when(
+        validationService.isPasswordValid(password: anyNamed('password')),
+      ).thenReturn(key != 'password');
+      when(
+        validationService.isPhoneNumberValid(
+            phoneNumber: anyNamed('phoneNumber')),
+      ).thenReturn(key != 'phoneNumber');
+      when(
+        validationService.isFirstNameValid(firstName: anyNamed('firstName')),
+      ).thenReturn(key != 'firstName');
+      when(
+        validationService.isLastNameValid(lastName: anyNamed('lastName')),
+      ).thenReturn(key != 'lastName');
+      when(validationService.error).thenReturn(errorMessage);
 
-        //Act
-        sut.call(store, action, next);
+      //Act
+      sut.call(store, action, next);
 
-        //Assert
-        final verification = verify(store.dispatch(captureAny));
-        expect(
-          verification.captured[0].runtimeType,
-          CreateOwnerErrorsClearedAction,
-        );
-        expect(verification.captured[1].runtimeType, value);
-        expect(verification.captured[1].error, errorMessage);
-      });
+      //Assert
+      final verification = verify(store.dispatch(captureAny));
+      expect(
+        verification.captured[0].runtimeType,
+        CreateOwnerErrorsClearedAction,
+      );
+      expect(verification.captured[1].runtimeType, value);
+      expect(verification.captured[1].error, errorMessage);
     });
   });
 
@@ -166,49 +164,47 @@ void main() {
     ))).called(1);
   });
 
-  group('Validation middleware - organisation info validation failed', () {
-    final fieldToExpected = {
-      'organisationName': OrganisationNameValidationFailedAction,
-      'organisationSize': OrganisationSizeValidationFailedAction,
-      'maxApplications': MaxApplicationValidationFailedAction,
-    };
+  final organisationFieldToExpected = {
+    'organisationName': OrganisationNameValidationFailedAction,
+    'organisationSize': OrganisationSizeValidationFailedAction,
+    'maxApplications': MaxApplicationValidationFailedAction,
+  };
 
-    final action = ValidateOrganisationInfo(
-      organisationName: 'organisationName',
-      organisationSize: OrganisationSize.small,
-      maxApplications: 'maxApplications',
-    );
+  final validateOrganisationAction = ValidateOrganisationInfo(
+    organisationName: 'organisationName',
+    organisationSize: OrganisationSize.small,
+    maxApplications: 'maxApplications',
+  );
 
-    fieldToExpected.forEach((key, value) {
-      test('$key validation failed', () {
-        //Arrange
-        const errorMessage = 'error';
-        when(
-          validationService.isOrganisationNameValid(
-              organisationName: anyNamed('organisationName')),
-        ).thenReturn(key != 'organisationName');
-        when(
-          validationService.isOrganisationSizeValid(
-              organisationSize: anyNamed('organisationSize')),
-        ).thenReturn(key != 'organisationSize');
-        when(
-          validationService.isMaxApplicationsValid(
-              maxApplications: anyNamed('maxApplications')),
-        ).thenReturn(key != 'maxApplications');
-        when(validationService.error).thenReturn(errorMessage);
+  organisationFieldToExpected.forEach((key, value) {
+    test('Validation middleware - organisation $key validation failed', () {
+      //Arrange
+      const errorMessage = 'error';
+      when(
+        validationService.isOrganisationNameValid(
+            organisationName: anyNamed('organisationName')),
+      ).thenReturn(key != 'organisationName');
+      when(
+        validationService.isOrganisationSizeValid(
+            organisationSize: anyNamed('organisationSize')),
+      ).thenReturn(key != 'organisationSize');
+      when(
+        validationService.isMaxApplicationsValid(
+            maxApplications: anyNamed('maxApplications')),
+      ).thenReturn(key != 'maxApplications');
+      when(validationService.error).thenReturn(errorMessage);
 
-        //Act
-        sut.call(store, action, next);
+      //Act
+      sut.call(store, validateOrganisationAction, next);
 
-        //Assert
-        final verification = verify(store.dispatch(captureAny));
-        expect(
-          verification.captured[0].runtimeType,
-          CreateOrganisationErrorsClearedAction,
-        );
-        expect(verification.captured[1].runtimeType, value);
-        expect(verification.captured[1].error, errorMessage);
-      });
+      //Assert
+      final verification = verify(store.dispatch(captureAny));
+      expect(
+        verification.captured[0].runtimeType,
+        CreateOrganisationErrorsClearedAction,
+      );
+      expect(verification.captured[1].runtimeType, value);
+      expect(verification.captured[1].error, errorMessage);
     });
   });
 
@@ -235,39 +231,37 @@ void main() {
     ));
   });
 
-  group('Validation middleware - login info validation failed', () {
-    final fieldToExpected = {
-      'email': EmailValidationFailedAuthorizationAction,
-      'password': PasswordValidationFailedAuthorizationAction,
-    };
+  final logInFieldToExpected = {
+    'email': EmailValidationFailedAuthorizationAction,
+    'password': PasswordValidationFailedAuthorizationAction,
+  };
 
-    final stubAction =
-        ValidateLogInInfoAction(email: 'email', password: 'password');
+  final validateLogInAction =
+      ValidateLogInInfoAction(email: 'email', password: 'password');
 
-    fieldToExpected.forEach((key, value) {
-      test('$key validation failed', () {
-        //Arrange
-        const errorMessage = 'error';
-        when(
-          validationService.isEmailValid(email: anyNamed('email')),
-        ).thenReturn(key != 'email');
-        when(
-          validationService.isNotEmpty(any, fieldName: anyNamed('fieldName')),
-        ).thenReturn(key != 'password');
-        when(validationService.error).thenReturn(errorMessage);
+  logInFieldToExpected.forEach((key, value) {
+    test('$key validation failed', () {
+      //Arrange
+      const errorMessage = 'error';
+      when(
+        validationService.isEmailValid(email: anyNamed('email')),
+      ).thenReturn(key != 'email');
+      when(
+        validationService.isNotEmpty(any, fieldName: anyNamed('fieldName')),
+      ).thenReturn(key != 'password');
+      when(validationService.error).thenReturn(errorMessage);
 
-        //Act
-        sut.call(store, stubAction, next);
+      //Act
+      sut.call(store, validateLogInAction, next);
 
-        //Assert
-        final verification = verify(store.dispatch(captureAny));
-        expect(
-          verification.captured[0].runtimeType,
-          LogInErrorsClearedAction,
-        );
-        expect(verification.captured[1].runtimeType, value);
-        expect(verification.captured[1].error, errorMessage);
-      });
+      //Assert
+      final verification = verify(store.dispatch(captureAny));
+      expect(
+        verification.captured[0].runtimeType,
+        LogInErrorsClearedAction,
+      );
+      expect(verification.captured[1].runtimeType, value);
+      expect(verification.captured[1].error, errorMessage);
     });
   });
 

@@ -30,8 +30,8 @@ class AuthorizationMiddleware extends BaseMiddleware {
   ) {
     userNetworkService
         .logIn(
-          email: state.email!,
-          password: state.password!,
+          email: state.email,
+          password: state.password,
         )
         .then(
           (value) => value.when(

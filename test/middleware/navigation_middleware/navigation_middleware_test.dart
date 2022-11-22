@@ -32,72 +32,66 @@ void main() {
     sut = NavigationMiddleware(navigationService: navigationService);
   });
 
-  group('Navigation middleware - pushes correct route', () {
-    final actionToNavigation = {
-      NavigateToCreateOwnerAction():
-          RouteDirection.createOrganisationOwnerScreen,
-      NavigateToCreateOrganisationAction():
-          RouteDirection.createOrganisationScreen,
-      NavigateToLogInAction(): RouteDirection.logInScreen,
-    };
+  final actionToNavigation = {
+    NavigateToCreateOwnerAction(): RouteDirection.createOrganisationOwnerScreen,
+    NavigateToCreateOrganisationAction():
+        RouteDirection.createOrganisationScreen,
+    NavigateToLogInAction(): RouteDirection.logInScreen,
+  };
 
-    actionToNavigation.forEach((key, value) {
-      test('When action is ${key.runtimeType} navigates to $value', () {
-        //Arrange
+  actionToNavigation.forEach((key, value) {
+    test(
+        'Navigation middleware - action ${key.runtimeType} navigates to $value',
+        () {
+      //Arrange
 
-        //Act
-        sut.call(store, key, next);
+      //Act
+      sut.call(store, key, next);
 
-        //Assert
-        verify(navigationService.pushNamed(value)).called(1);
-      });
+      //Assert
+      verify(navigationService.pushNamed(value)).called(1);
     });
   });
 
-  group('Navigation middleware - pops to correct route', () {
-    final actionToNavigation = {
-      CancelRegistrationAction(): RouteDirection.startScreen,
-      OrganisationCreatedAction(): RouteDirection.startScreen,
-      CancelLogInAction(): RouteDirection.startScreen,
-    };
+  final actionToPopUntilNavigation = {
+    CancelRegistrationAction(): RouteDirection.startScreen,
+    OrganisationCreatedAction(): RouteDirection.startScreen,
+    CancelLogInAction(): RouteDirection.startScreen,
+  };
 
-    actionToNavigation.forEach((key, value) {
-      test('When action is ${key.runtimeType} pops to $value', () {
-        //Arrange
-        //Act
-        sut.call(store, key, next);
+  actionToPopUntilNavigation.forEach((key, value) {
+    test('Navigation middleware - action ${key.runtimeType} pops to $value',
+        () {
+      //Arrange
+      //Act
+      sut.call(store, key, next);
 
-        //Assert
-        verify(navigationService.popUntil(value)).called(1);
-      });
+      //Assert
+      verify(navigationService.popUntil(value)).called(1);
     });
   });
 
-  group(
-      'Navigation middleware - pushes to correct route and removes previous screens',
-      () {
-    final actionToNavigation = {
-      NavigateToHomeScreenReplacementAction(): RouteDirection.homeScreen,
-      LogOutAction(): RouteDirection.startScreen,
-    };
+  final actionToPushAndRemoveNavigation = {
+    NavigateToHomeScreenReplacementAction(): RouteDirection.homeScreen,
+    LogOutAction(): RouteDirection.startScreen,
+  };
 
-    actionToNavigation.forEach((key, value) {
-      test(
-          'When action is ${key.runtimeType} pushes $value and removes previous screens',
-          () {
-        //Arrange
-        final route = MockRoute();
+  actionToPushAndRemoveNavigation.forEach((key, value) {
+    test(
+        'Navigation middleware - action ${key.runtimeType} pushes $value and removes previous screens',
+        () {
+      //Arrange
+      final route = MockRoute();
 
-        //Act
-        sut.call(store, key, next);
+      //Act
+      sut.call(store, key, next);
 
-        //Assert
-        final verification = verify(
-          navigationService.pushNamedAndRemoveUntil(value, captureAny),
-        );
-        expect(verification.callCount, 1);
-        expect(verification.captured[0](route), false);
-      });
+      //Assert
+      final verification = verify(
+        navigationService.pushNamedAndRemoveUntil(value, captureAny),
+      );
+      expect(verification.callCount, 1);
+      expect(verification.captured[0](route), false);
     });
   });
 }

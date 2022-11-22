@@ -7,8 +7,8 @@ import 'package:logotime/network/user/token/token_service.dart';
 
 abstract class IUserNetworkService {
   Future<INetworkResult<dynamic>> logIn({
-    required String email,
-    required String password,
+    required String? email,
+    required String? password,
   });
 
   Future<INetworkResult> getUserInfo(String id);
@@ -30,8 +30,8 @@ class UserNetworkService implements IUserNetworkService {
 
   @override
   Future<INetworkResult> logIn({
-    required String email,
-    required String password,
+    required String? email,
+    required String? password,
   }) async {
     final response = await _dio.makeRequest(
       NetworkRequest<LogInRequestModel>(
