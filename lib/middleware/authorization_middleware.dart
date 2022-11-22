@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:logotime/middleware/base_middleware.dart';
 import 'package:logotime/network/user/user_network_service.dart';
 import 'package:logotime/redux/action/common/operation_result_action.dart';
@@ -16,7 +18,7 @@ class AuthorizationMiddleware extends BaseMiddleware {
     if (action is LogInNetworkAction) {
       _logIn(state.authorizationState, dispatch);
     } else if (action is OperationFailureAction) {
-      if (action.statusCode == 401) {
+      if (action.statusCode == HttpStatus.unauthorized) {
         dispatch(LogOutAction());
       }
     }
@@ -28,8 +30,8 @@ class AuthorizationMiddleware extends BaseMiddleware {
   ) {
     userNetworkService
         .logIn(
-          email: state.email!,
-          password: state.password!,
+          email: state.email,
+          password: state.password,
         )
         .then(
           (value) => value.when(

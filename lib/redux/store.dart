@@ -27,7 +27,7 @@ Store<AppState> initStore() {
       initialState: AppState.initial(),
       middleware: [
         NavigationMiddleware(navigationService: sl.get()),
-        ValidationMiddleware(),
+        ValidationMiddleware(validationService: sl.get()),
         OrganisationMiddleware(organisationNetworkService: sl.get()),
         AuthorizationMiddleware(userNetworkService: sl.get()),
         UserMiddleware(userNetworkService: sl.get()),

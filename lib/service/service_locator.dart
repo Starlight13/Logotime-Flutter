@@ -10,6 +10,7 @@ import 'package:logotime/service/navigation/route_definition_service.dart';
 import 'package:logotime/service/snack_bar/snack_bar_definition_service.dart';
 import 'package:logotime/service/snack_bar/snack_bar_service.dart';
 import 'package:logotime/service/store/store_service.dart';
+import 'package:logotime/service/validation/validation_service.dart';
 
 final sl = GetIt.I;
 
@@ -37,6 +38,7 @@ void initServiceLocator() {
   sl.registerSingleton<IUserNetworkService>(
     UserNetworkService(dio: sl.get(), tokenService: sl.get()),
   );
+  sl.registerSingleton<IValidationService>(ValidationService());
 
   sl.registerSingleton<IStoreService>(StoreService(store: initStore()));
 }
