@@ -44,7 +44,7 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.createOrganisation.capitalize()),
+        title: Text(localizations.registerOrganisation.capitalize()),
       ),
       body: SafeArea(
         child: Padding(
@@ -227,7 +227,7 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
                       organisationSize: _organisationSize,
                       maxApplications: _maxApplicationTextController.text,
                     ),
-                    text: localizations.createOrganisation.capitalize(),
+                    text: localizations.registerOrganisation.capitalize(),
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                   ),
                 )

@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: AppColors.white,
             iconTheme: IconThemeData(color: Colors.brown),
             titleTextStyle: TextStyle(
-              color: Colors.brown,
+              color: Color.fromARGB(255, 203, 136, 29),
               fontSize: 22.0,
               fontFamily: 'Balsamiq Sans',
             ),

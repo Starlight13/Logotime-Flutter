@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:logotime/middleware/snack_bar_middleware.dart';
 import 'package:logotime/redux/action/common/operation_result_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
-import 'package:logotime/service/snack_bar/snack_bar_definition_service.dart';
 import 'package:logotime/service/snack_bar/snack_bar_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

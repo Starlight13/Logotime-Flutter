@@ -31,7 +31,7 @@ class RegularButton extends StatelessWidget {
         duration: const Duration(milliseconds: 300),
         padding: padding,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6.0),
+          borderRadius: BorderRadius.circular(40.0),
           color: buttonColor,
         ),
         child: Text(text,
