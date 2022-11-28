@@ -12,6 +12,7 @@ class CreateOrganisationConverter
   final String? maxApplicationsError;
   RulesModel organisationRules;
   Function(dynamic) dispatch;
+  final bool isLoading;
 
   CreateOrganisationConverter({
     required this.organisationNameError,
@@ -19,6 +20,7 @@ class CreateOrganisationConverter
     required this.organisationRules,
     required this.dispatch,
     required this.maxApplicationsError,
+    required this.isLoading,
   });
 
   @override
@@ -31,7 +33,8 @@ class CreateOrganisationConverter
       ..onSwapShiftRuleChanged = _onSwapShiftRuleChanged
       ..onCheckInRuleChanged = _onCheckInRuleChanged
       ..onUnassignedShiftRuleChanged = _onUnassignedShiftRuleChanged
-      ..onCreateOrganisationButtonPressed = _onCreateOrganisation);
+      ..onCreateOrganisationButtonPressed = _onCreateOrganisation
+      ..isLoading = isLoading);
   }
 
   void _onSubstituteMeRuleChanged({bool? isAllowed, bool? needApproval}) {

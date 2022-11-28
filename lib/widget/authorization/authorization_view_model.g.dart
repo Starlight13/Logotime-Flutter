@@ -16,6 +16,8 @@ class _$AuthorizationViewModel extends AuthorizationViewModel {
   @override
   final Function({required String? email, required String? password})
       onLogInPressed;
+  @override
+  final bool isLoading;
 
   factory _$AuthorizationViewModel(
           [void Function(AuthorizationViewModelBuilder)? updates]) =>
@@ -25,12 +27,15 @@ class _$AuthorizationViewModel extends AuthorizationViewModel {
       {this.emailError,
       this.passwordError,
       required this.onBackPressed,
-      required this.onLogInPressed})
+      required this.onLogInPressed,
+      required this.isLoading})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         onBackPressed, r'AuthorizationViewModel', 'onBackPressed');
     BuiltValueNullFieldError.checkNotNull(
         onLogInPressed, r'AuthorizationViewModel', 'onLogInPressed');
+    BuiltValueNullFieldError.checkNotNull(
+        isLoading, r'AuthorizationViewModel', 'isLoading');
   }
 
   @override
@@ -50,15 +55,18 @@ class _$AuthorizationViewModel extends AuthorizationViewModel {
         emailError == other.emailError &&
         passwordError == other.passwordError &&
         onBackPressed == _$dynamicOther.onBackPressed &&
-        onLogInPressed == _$dynamicOther.onLogInPressed;
+        onLogInPressed == _$dynamicOther.onLogInPressed &&
+        isLoading == other.isLoading;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, emailError.hashCode), passwordError.hashCode),
-            onBackPressed.hashCode),
-        onLogInPressed.hashCode));
+        $jc(
+            $jc($jc($jc(0, emailError.hashCode), passwordError.hashCode),
+                onBackPressed.hashCode),
+            onLogInPressed.hashCode),
+        isLoading.hashCode));
   }
 
   @override
@@ -67,7 +75,8 @@ class _$AuthorizationViewModel extends AuthorizationViewModel {
           ..add('emailError', emailError)
           ..add('passwordError', passwordError)
           ..add('onBackPressed', onBackPressed)
-          ..add('onLogInPressed', onLogInPressed))
+          ..add('onLogInPressed', onLogInPressed)
+          ..add('isLoading', isLoading))
         .toString();
   }
 }
@@ -99,6 +108,10 @@ class AuthorizationViewModelBuilder
               onLogInPressed) =>
       _$this._onLogInPressed = onLogInPressed;
 
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
+
   AuthorizationViewModelBuilder();
 
   AuthorizationViewModelBuilder get _$this {
@@ -108,6 +121,7 @@ class AuthorizationViewModelBuilder
       _passwordError = $v.passwordError;
       _onBackPressed = $v.onBackPressed;
       _onLogInPressed = $v.onLogInPressed;
+      _isLoading = $v.isLoading;
       _$v = null;
     }
     return this;
@@ -135,7 +149,9 @@ class AuthorizationViewModelBuilder
             onBackPressed: BuiltValueNullFieldError.checkNotNull(
                 onBackPressed, r'AuthorizationViewModel', 'onBackPressed'),
             onLogInPressed: BuiltValueNullFieldError.checkNotNull(
-                onLogInPressed, r'AuthorizationViewModel', 'onLogInPressed'));
+                onLogInPressed, r'AuthorizationViewModel', 'onLogInPressed'),
+            isLoading: BuiltValueNullFieldError.checkNotNull(
+                isLoading, r'AuthorizationViewModel', 'isLoading'));
     replace(_$result);
     return _$result;
   }

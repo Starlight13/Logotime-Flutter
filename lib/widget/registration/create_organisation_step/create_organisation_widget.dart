@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:logotime/extensions.dart';
 import 'package:logotime/network/model/organisation/organisation_size.dart';
 import 'package:logotime/network/model/rules/rule_enums.dart';
+import 'package:logotime/widget/common/animation/loading_overlay.dart';
 import 'package:logotime/widget/common/animation/roll_down_animated_switcher.dart';
 import 'package:logotime/widget/common/buttons/regular_button.dart';
 import 'package:logotime/widget/common/forms/labeled_switch.dart';
@@ -52,186 +53,191 @@ class _CreateOrganisationWidgetState extends State<CreateOrganisationWidget> {
             horizontal: 30.0,
           ),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: StyledTextField(
-                    fieldTitle: localizations.organisationName.capitalize(),
-                    controller: _organisationNameTextController,
-                    error: widget.viewModel.organisationNameError,
-                  ),
-                ),
-                Text(
-                  localizations.organisationSize.capitalize(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 25.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: _organisationSizeButtons(),
-                ),
-                if (widget.viewModel.organisationSizeError != null)
+            child: LoadingOverlay(
+              isLoading: widget.viewModel.isLoading,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                    child: Text(
-                      widget.viewModel.organisationSizeError ?? '',
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.red,
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: StyledTextField(
+                      fieldTitle: localizations.organisationName.capitalize(),
+                      controller: _organisationNameTextController,
+                      error: widget.viewModel.organisationNameError,
+                    ),
+                  ),
+                  Text(
+                    localizations.organisationSize.capitalize(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: _organisationSizeButtons(),
+                  ),
+                  if (widget.viewModel.organisationSizeError != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                      child: Text(
+                        widget.viewModel.organisationSizeError ?? '',
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.red,
+                        ),
                       ),
                     ),
+                  const SizedBox(
+                    height: 20.0,
                   ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                Text(
-                  localizations.substitutionRule.capitalize(),
-                  style: const TextStyle(fontSize: 25.0),
-                  textAlign: TextAlign.center,
-                ),
-                LabeledSwitch(
-                  label:
-                      '${localizations.allow.capitalize()} ${localizations.substitution}',
-                  value: rules.substituteMeRule != SubstituteMeRule.prohibited,
-                  onChange: (value) =>
-                      widget.viewModel.onSubstituteMeRuleChanged(
-                    isAllowed: value,
+                  Text(
+                    localizations.substitutionRule.capitalize(),
+                    style: const TextStyle(fontSize: 25.0),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                RollDownAnimatedSwitcher(
-                  child: rules.substituteMeRule == SubstituteMeRule.prohibited
-                      ? null
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                            left: 30.0,
-                            top: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: LabeledSwitch(
-                            label: localizations.needApproval.capitalize(),
-                            value: rules.substituteMeRule ==
-                                SubstituteMeRule.allowedWithApproval,
-                            onChange: (value) =>
-                                widget.viewModel.onSubstituteMeRuleChanged(
-                              needApproval: value,
-                            ),
-                          ),
-                        ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  localizations.swapShiftsRule.capitalize(),
-                  style: const TextStyle(fontSize: 25.0),
-                  textAlign: TextAlign.center,
-                ),
-                LabeledSwitch(
-                  label:
-                      '${localizations.allow.capitalize()} ${localizations.swappingShifts}',
-                  value: rules.swapShiftRule != SwapShiftRule.prohibited,
-                  onChange: (value) => widget.viewModel.onSwapShiftRuleChanged(
-                    isAllowed: value,
-                  ),
-                ),
-                RollDownAnimatedSwitcher(
-                  child: rules.swapShiftRule == SwapShiftRule.prohibited
-                      ? null
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                            left: 30.0,
-                            top: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: LabeledSwitch(
-                            label: localizations.needApproval.capitalize(),
-                            value: rules.swapShiftRule ==
-                                SwapShiftRule.allowedWithApproval,
-                            onChange: (value) =>
-                                widget.viewModel.onSwapShiftRuleChanged(
-                              needApproval: value,
-                            ),
-                          ),
-                        ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  localizations.checkInRule.capitalize(),
-                  style: const TextStyle(fontSize: 25.0),
-                  textAlign: TextAlign.center,
-                ),
-                LabeledSwitch(
-                  label: localizations.photoCheckIn.capitalize(),
-                  value: rules.checkInRule == CheckInRule.photo ||
-                      rules.checkInRule == CheckInRule.geoAndPhoto,
-                  onChange: (value) => widget.viewModel.onCheckInRuleChanged(
-                    photoRequired: value,
-                  ),
-                ),
-                LabeledSwitch(
-                  label: localizations.geoCheckIn.capitalize(),
-                  value: rules.checkInRule == CheckInRule.geo ||
-                      rules.checkInRule == CheckInRule.geoAndPhoto,
-                  onChange: (value) => widget.viewModel.onCheckInRuleChanged(
-                    geoRequired: value,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  localizations.unassignedShift.capitalize(),
-                  style: const TextStyle(fontSize: 25.0),
-                  textAlign: TextAlign.center,
-                ),
-                LabeledSwitch(
-                  label:
-                      '${localizations.allow.capitalize()} ${localizations.unassignedShifts}',
-                  value:
-                      rules.unassignedShiftRule == UnassignedShiftRule.allowed,
-                  onChange: (value) => widget.viewModel
-                      .onUnassignedShiftRuleChanged(isAllowed: value),
-                ),
-                RollDownAnimatedSwitcher(
-                  child:
-                      rules.unassignedShiftRule == UnassignedShiftRule.allowed
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
-                              child: StyledTextField(
-                                fieldTitle: localizations.maxNumOfApplications,
-                                controller: _maxApplicationTextController,
-                                hint: localizations.maxApplicationsHint,
-                                error: widget.viewModel.maxApplicationsError,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                ],
-                              ),
-                            )
-                          : null,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: RegularButton(
-                    onTap: () =>
-                        widget.viewModel.onCreateOrganisationButtonPressed(
-                      organisationName: _organisationNameTextController.text,
-                      organisationSize: _organisationSize,
-                      maxApplications: _maxApplicationTextController.text,
+                  LabeledSwitch(
+                    label:
+                        '${localizations.allow.capitalize()} ${localizations.substitution}',
+                    value:
+                        rules.substituteMeRule != SubstituteMeRule.prohibited,
+                    onChange: (value) =>
+                        widget.viewModel.onSubstituteMeRuleChanged(
+                      isAllowed: value,
                     ),
-                    text: localizations.registerOrganisation.capitalize(),
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
                   ),
-                )
-              ],
+                  RollDownAnimatedSwitcher(
+                    child: rules.substituteMeRule == SubstituteMeRule.prohibited
+                        ? null
+                        : Padding(
+                            padding: const EdgeInsets.only(
+                              left: 30.0,
+                              top: 10.0,
+                              bottom: 10.0,
+                            ),
+                            child: LabeledSwitch(
+                              label: localizations.needApproval.capitalize(),
+                              value: rules.substituteMeRule ==
+                                  SubstituteMeRule.allowedWithApproval,
+                              onChange: (value) =>
+                                  widget.viewModel.onSubstituteMeRuleChanged(
+                                needApproval: value,
+                              ),
+                            ),
+                          ),
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    localizations.swapShiftsRule.capitalize(),
+                    style: const TextStyle(fontSize: 25.0),
+                    textAlign: TextAlign.center,
+                  ),
+                  LabeledSwitch(
+                    label:
+                        '${localizations.allow.capitalize()} ${localizations.swappingShifts}',
+                    value: rules.swapShiftRule != SwapShiftRule.prohibited,
+                    onChange: (value) =>
+                        widget.viewModel.onSwapShiftRuleChanged(
+                      isAllowed: value,
+                    ),
+                  ),
+                  RollDownAnimatedSwitcher(
+                    child: rules.swapShiftRule == SwapShiftRule.prohibited
+                        ? null
+                        : Padding(
+                            padding: const EdgeInsets.only(
+                              left: 30.0,
+                              top: 10.0,
+                              bottom: 10.0,
+                            ),
+                            child: LabeledSwitch(
+                              label: localizations.needApproval.capitalize(),
+                              value: rules.swapShiftRule ==
+                                  SwapShiftRule.allowedWithApproval,
+                              onChange: (value) =>
+                                  widget.viewModel.onSwapShiftRuleChanged(
+                                needApproval: value,
+                              ),
+                            ),
+                          ),
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    localizations.checkInRule.capitalize(),
+                    style: const TextStyle(fontSize: 25.0),
+                    textAlign: TextAlign.center,
+                  ),
+                  LabeledSwitch(
+                    label: localizations.photoCheckIn.capitalize(),
+                    value: rules.checkInRule == CheckInRule.photo ||
+                        rules.checkInRule == CheckInRule.geoAndPhoto,
+                    onChange: (value) => widget.viewModel.onCheckInRuleChanged(
+                      photoRequired: value,
+                    ),
+                  ),
+                  LabeledSwitch(
+                    label: localizations.geoCheckIn.capitalize(),
+                    value: rules.checkInRule == CheckInRule.geo ||
+                        rules.checkInRule == CheckInRule.geoAndPhoto,
+                    onChange: (value) => widget.viewModel.onCheckInRuleChanged(
+                      geoRequired: value,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    localizations.unassignedShift.capitalize(),
+                    style: const TextStyle(fontSize: 25.0),
+                    textAlign: TextAlign.center,
+                  ),
+                  LabeledSwitch(
+                    label:
+                        '${localizations.allow.capitalize()} ${localizations.unassignedShifts}',
+                    value: rules.unassignedShiftRule ==
+                        UnassignedShiftRule.allowed,
+                    onChange: (value) => widget.viewModel
+                        .onUnassignedShiftRuleChanged(isAllowed: value),
+                  ),
+                  RollDownAnimatedSwitcher(
+                    child: rules.unassignedShiftRule ==
+                            UnassignedShiftRule.allowed
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: StyledTextField(
+                              fieldTitle: localizations.maxNumOfApplications,
+                              controller: _maxApplicationTextController,
+                              hint: localizations.maxApplicationsHint,
+                              error: widget.viewModel.maxApplicationsError,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                            ),
+                          )
+                        : null,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: RegularButton(
+                      onTap: () =>
+                          widget.viewModel.onCreateOrganisationButtonPressed(
+                        organisationName: _organisationNameTextController.text,
+                        organisationSize: _organisationSize,
+                        maxApplications: _maxApplicationTextController.text,
+                      ),
+                      text: localizations.registerOrganisation.capitalize(),
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -38,3 +38,9 @@ class LogInNetworkAction {}
 class LogInSuccessAction {}
 
 class LogOutAction {}
+
+class AuthorizationLoadingChanged {
+  final bool isLoading;
+
+  AuthorizationLoadingChanged(this.isLoading);
+}

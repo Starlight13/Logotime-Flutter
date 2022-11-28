@@ -6,15 +6,21 @@ import 'package:logotime/widget/home/home_view_model.dart';
 
 class HomeConverter extends ViewModelConverter<HomeViewModel> {
   final UserModel? user;
+  final bool isLoading;
   final Function(dynamic) dispatch;
 
-  HomeConverter({required this.user, required this.dispatch});
+  HomeConverter({
+    required this.user,
+    required this.dispatch,
+    required this.isLoading,
+  });
 
   @override
   HomeViewModel build() {
     return HomeViewModel(
       (viewModel) => viewModel
         ..user = user?.toBuilder()
+        ..isLoading = isLoading
         ..onLogOutPressed = (() => dispatch(LogOutAction()))
         ..onUpdatePressed = (() => dispatch(GetCurrentUserInfoAction())),
     );

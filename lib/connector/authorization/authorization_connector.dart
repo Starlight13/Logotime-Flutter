@@ -20,6 +20,7 @@ class AuthorizationConnector
     return AuthorizationConverter(
       emailError: state.authorizationState.emailError,
       passwordError: state.authorizationState.passwordError,
+      isLoading: state.authorizationState.isLoading,
       dispatch: dispatch,
     );
   }

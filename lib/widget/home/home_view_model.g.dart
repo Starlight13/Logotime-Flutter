@@ -10,6 +10,8 @@ class _$HomeViewModel extends HomeViewModel {
   @override
   final UserModel? user;
   @override
+  final bool isLoading;
+  @override
   final Function() onLogOutPressed;
   @override
   final Function() onUpdatePressed;
@@ -18,8 +20,13 @@ class _$HomeViewModel extends HomeViewModel {
       (new HomeViewModelBuilder()..update(updates))._build();
 
   _$HomeViewModel._(
-      {this.user, required this.onLogOutPressed, required this.onUpdatePressed})
+      {this.user,
+      required this.isLoading,
+      required this.onLogOutPressed,
+      required this.onUpdatePressed})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        isLoading, r'HomeViewModel', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(
         onLogOutPressed, r'HomeViewModel', 'onLogOutPressed');
     BuiltValueNullFieldError.checkNotNull(
@@ -39,13 +46,16 @@ class _$HomeViewModel extends HomeViewModel {
     final dynamic _$dynamicOther = other;
     return other is HomeViewModel &&
         user == other.user &&
+        isLoading == other.isLoading &&
         onLogOutPressed == _$dynamicOther.onLogOutPressed &&
         onUpdatePressed == _$dynamicOther.onUpdatePressed;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, user.hashCode), onLogOutPressed.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, user.hashCode), isLoading.hashCode),
+            onLogOutPressed.hashCode),
         onUpdatePressed.hashCode));
   }
 
@@ -53,6 +63,7 @@ class _$HomeViewModel extends HomeViewModel {
   String toString() {
     return (newBuiltValueToStringHelper(r'HomeViewModel')
           ..add('user', user)
+          ..add('isLoading', isLoading)
           ..add('onLogOutPressed', onLogOutPressed)
           ..add('onUpdatePressed', onUpdatePressed))
         .toString();
@@ -66,6 +77,10 @@ class HomeViewModelBuilder
   UserModelBuilder? _user;
   UserModelBuilder get user => _$this._user ??= new UserModelBuilder();
   set user(UserModelBuilder? user) => _$this._user = user;
+
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
   Function()? _onLogOutPressed;
   Function()? get onLogOutPressed => _$this._onLogOutPressed;
@@ -83,6 +98,7 @@ class HomeViewModelBuilder
     final $v = _$v;
     if ($v != null) {
       _user = $v.user?.toBuilder();
+      _isLoading = $v.isLoading;
       _onLogOutPressed = $v.onLogOutPressed;
       _onUpdatePressed = $v.onUpdatePressed;
       _$v = null;
@@ -110,6 +126,8 @@ class HomeViewModelBuilder
       _$result = _$v ??
           new _$HomeViewModel._(
               user: _user?.build(),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, r'HomeViewModel', 'isLoading'),
               onLogOutPressed: BuiltValueNullFieldError.checkNotNull(
                   onLogOutPressed, r'HomeViewModel', 'onLogOutPressed'),
               onUpdatePressed: BuiltValueNullFieldError.checkNotNull(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextWithLabel extends StatelessWidget {
   final String label;
-  final String text;
+  final Widget text;
   final TextStyle? labelStyle;
   final TextStyle? textStyle;
   final EdgeInsets padding;
@@ -29,11 +29,8 @@ class TextWithLabel extends StatelessWidget {
             style: labelStyle,
           )),
           Expanded(
-              child: Text(
-            text,
-            textAlign: TextAlign.right,
-            style: textStyle,
-          )),
+            child: text,
+          ),
         ],
       ),
     );

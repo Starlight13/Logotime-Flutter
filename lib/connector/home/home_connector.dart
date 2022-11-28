@@ -20,6 +20,7 @@ class HomeConnector extends PageConnector<HomeViewModel, HomeConverter> {
       BuildContext context, AppState state, Function(dynamic p1) dispatch) {
     return HomeConverter(
       user: state.homeState.user,
+      isLoading: state.homeState.isLoading,
       dispatch: dispatch,
     );
   }

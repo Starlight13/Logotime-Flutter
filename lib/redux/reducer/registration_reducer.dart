@@ -22,6 +22,7 @@ Reducer<RegistrationState> get registrationReducer {
     TypedReducer(_maxApplicationsErrorChanged),
     TypedReducer(_registrationCanceled),
     TypedReducer(_organisationInfoValidationSucceeded),
+    TypedReducer(_isLoadingChanged),
   ]);
 }
 
@@ -209,4 +210,11 @@ RegistrationState _organisationInfoValidationSucceeded(
     ..organisationName = action.organisationName
     ..organisationSize = action.organisationSize
     ..organisationRules.maxApplications = action.maxApplications);
+}
+
+RegistrationState _isLoadingChanged(
+  RegistrationState oldState,
+  RegistrationLoadingChanged action,
+) {
+  return oldState.rebuild((state) => state.isLoading = action.isLoading);
 }

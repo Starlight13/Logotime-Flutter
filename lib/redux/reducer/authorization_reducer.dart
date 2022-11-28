@@ -10,6 +10,7 @@ Reducer<AuthorizationState> get authorizationReducer {
     TypedReducer(_logInInfoChanged),
     TypedReducer(_logOutAction),
     TypedReducer(_logInSuccess),
+    TypedReducer(_loadingChanged),
   ]);
 }
 
@@ -49,7 +50,9 @@ AuthorizationState _logInSuccess(
   AuthorizationState oldState,
   LogInSuccessAction action,
 ) {
-  return AuthorizationState((state) => state..isLoggedIn = true);
+  return AuthorizationState((state) => state
+    ..isLoggedIn = true
+    ..isLoading = false);
 }
 
 AuthorizationState _logOutAction(
@@ -57,4 +60,11 @@ AuthorizationState _logOutAction(
   LogOutAction action,
 ) {
   return AuthorizationState.initial();
+}
+
+AuthorizationState _loadingChanged(
+  AuthorizationState oldState,
+  AuthorizationLoadingChanged action,
+) {
+  return oldState.rebuild((state) => state.isLoading = action.isLoading);
 }

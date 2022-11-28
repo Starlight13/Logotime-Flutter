@@ -23,6 +23,7 @@ class CreateOrganisationConnector extends PageConnector<
         organisationSizeError: state.registrationState.organisationSizeError,
         maxApplicationsError: state.registrationState.maxApplicationsError,
         organisationRules: state.registrationState.organisationRules,
+        isLoading: state.registrationState.isLoading,
         dispatch: dispatch);
   }
 }
