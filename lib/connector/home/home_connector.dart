@@ -1,9 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:logotime/connector/home/home_converter.dart';
 import 'package:logotime/connector/page_connector.dart';
+import 'package:logotime/redux/action/user/user_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
 import 'package:logotime/widget/home/home_view_model.dart';
 import 'package:logotime/widget/home/home_widget.dart';
+import 'package:redux/redux.dart';
 
 class HomeConnector extends PageConnector<HomeViewModel, HomeConverter> {
   const HomeConnector({super.key});
@@ -20,5 +22,10 @@ class HomeConnector extends PageConnector<HomeViewModel, HomeConverter> {
       user: state.homeState.user,
       dispatch: dispatch,
     );
+  }
+
+  @override
+  void onInit(BuildContext context, Store store) {
+    store.dispatch(GetCurrentUserInfoAction());
   }
 }

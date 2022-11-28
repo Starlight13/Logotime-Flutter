@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Balsamiq Sans',
           textTheme: const TextTheme(
             bodyMedium: TextStyle(
-              fontSize: 20.0,
+              fontSize: 24.0,
             ),
           ),
           appBarTheme: const AppBarTheme(

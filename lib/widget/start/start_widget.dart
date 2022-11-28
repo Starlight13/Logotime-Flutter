@@ -78,7 +78,7 @@ class _StartWidgetState extends State<StartWidget>
                   children: [
                     RegularButton(
                       onTap: widget.viewModel.onCreateOrganisationPressed,
-                      text: localization.registerOrganisation,
+                      text: localization.registerOrganisation.capitalize(),
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
                       buttonColor: AppColors.white,
                       textColor: AppColors.orange,

@@ -36,9 +36,11 @@ class RouteDefinitionService extends IRouteDefinitionService {
           settings: settings,
         );
       case RouteDirection.logInScreen:
-        return MaterialPageRoute(
-          builder: ((_) => const AuthorizationConnector()),
+        return CustomRoute(
+          screen: const AuthorizationConnector(),
+          transitionType: TransitionType.avatarReveal,
           settings: settings,
+          animationDuration: const Duration(milliseconds: 600),
         );
       case RouteDirection.homeScreen:
         return MaterialPageRoute(
