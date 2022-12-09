@@ -13,15 +13,15 @@ class AvatarClipper extends CustomClipper<Path> {
 
     path
       ..moveTo(widthCenter - this.size / 2, size.height)
-      ..lineTo(widthCenter - this.size / 2, size.height - this.size * 0.3)
+      ..lineTo(widthCenter - this.size / 2, size.height - this.size * 0.1)
       ..arcToPoint(
-          Offset(widthCenter + this.size / 2, size.height - this.size * 0.3),
-          radius: Radius.circular(this.size),
+          Offset(widthCenter + this.size / 2, size.height - this.size * 0.1),
+          radius: Radius.circular(this.size / 1.5),
           rotation: 10)
       ..lineTo(widthCenter + this.size / 2, size.height)
       ..addOval(
         Rect.fromCircle(
-            center: Offset(widthCenter, size.height - this.size * 0.8),
+            center: Offset(widthCenter, size.height - this.size * 0.7),
             radius: this.size / 4),
       );
     return path;

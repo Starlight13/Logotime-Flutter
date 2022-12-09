@@ -21,10 +21,8 @@ class UserMiddleware extends BaseMiddleware {
   void _getCurrentUserInfo(
     AuthorizationState state,
     Function(dynamic) dispatch,
-  ) async {
+  ) {
     dispatch(UserLoadingChangedAction(true));
-    //TODO: remove delay
-    await Future.delayed(const Duration(seconds: 2), () => {});
     userNetworkService
         .getCurrentUserInfo()
         ?.then(

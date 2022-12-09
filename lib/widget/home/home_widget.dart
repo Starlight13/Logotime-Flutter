@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logotime/extensions.dart';
 import 'package:logotime/widget/common/animation/loading_placeholder.dart';
 import 'package:logotime/widget/common/buttons/regular_button.dart';
+import 'package:logotime/widget/common/clipper/avatar_clipper.dart';
 import 'package:logotime/widget/common/lists/text_with_label.dart';
 import 'package:logotime/widget/home/home_view_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

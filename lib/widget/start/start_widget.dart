@@ -26,95 +26,99 @@ class _StartWidgetState extends State<StartWidget>
     return Scaffold(
       backgroundColor: AppColors.orange,
       body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            MasonryGridView.count(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: StartWidgetAssets.imagesPaths.length + 1,
-              shrinkWrap: true,
-              crossAxisCount: 3,
-              mainAxisSpacing: 4,
-              crossAxisSpacing: 4,
-              itemBuilder: (context, index) {
-                if (index == 5) {
-                  return const SizedBox(
-                    height: 150,
-                    child: Icon(
-                      Icons.perm_contact_calendar_rounded,
-                      color: Colors.white,
-                      size: 100.0,
-                    ),
-                  );
-                }
-                return SizedBox(
-                    height: index > 3 ? 200 : 100 * (index % 2 + 1),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 3,
-                          color: AppColors.white,
-                        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              MasonryGridView.count(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: StartWidgetAssets.imagesPaths.length + 1,
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                itemBuilder: (context, index) {
+                  if (index == 5) {
+                    return const SizedBox(
+                      height: 150,
+                      child: Icon(
+                        Icons.perm_contact_calendar_rounded,
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(6.0),
+                        size: 100.0,
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6.0),
-                        child: Image.asset(
-                          StartWidgetAssets
-                              .imagesPaths[index > 5 ? index - 1 : index],
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ));
-              },
-            ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    RegularButton(
-                      onTap: widget.viewModel.onCreateOrganisationPressed,
-                      text: localization.registerOrganisation.capitalize(),
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      buttonColor: AppColors.white,
-                      textColor: AppColors.orange,
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          localization.logInPrompt,
-                          style: const TextStyle(
+                    );
+                  }
+                  return SizedBox(
+                      height: index > 3
+                          ? constraints.maxHeight / 4
+                          : constraints.maxHeight / 8 * (index % 2 + 1),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 3,
                             color: AppColors.white,
                           ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(6.0),
                         ),
-                        const SizedBox(
-                          width: 5.0,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6.0),
+                          child: Image.asset(
+                            StartWidgetAssets
+                                .imagesPaths[index > 5 ? index - 1 : index],
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        GestureDetector(
-                          onTap: widget.viewModel.onLogInPressed,
-                          child: Text(
-                            localization.logIn.capitalize(),
+                      ));
+                },
+              ),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      RegularButton(
+                        onTap: widget.viewModel.onCreateOrganisationPressed,
+                        text: localization.registerOrganisation.capitalize(),
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        buttonColor: AppColors.white,
+                        textColor: AppColors.orange,
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            localization.logInPrompt,
                             style: const TextStyle(
-                              decoration: TextDecoration.underline,
                               color: AppColors.white,
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          GestureDetector(
+                            onTap: widget.viewModel.onLogInPressed,
+                            child: Text(
+                              localization.logIn.capitalize(),
+                              style: const TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -32,7 +32,7 @@ class CustomRoute extends PageRouteBuilder {
 
       final sizeAnimation = Tween(
         begin: 0.0,
-        end: screenSize.height * 2.5,
+        end: screenSize.height * 3.5,
       ).animate(
         CurvedAnimation(parent: animation, curve: Curves.easeIn),
       );

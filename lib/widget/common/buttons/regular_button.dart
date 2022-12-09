@@ -34,14 +34,16 @@ class RegularButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(40.0),
           color: buttonColor,
         ),
-        child: Text(text,
-            textAlign: TextAlign.center,
-            style: textStyle ??
-                TextStyle(
-                  color: textColor,
-                  fontWeight: fontWeight,
-                  fontSize: fontSize,
-                )),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: textStyle ??
+              TextStyle(
+                color: textColor,
+                fontWeight: fontWeight,
+                fontSize: fontSize,
+              ),
+        ),
       ),
     );
   }
