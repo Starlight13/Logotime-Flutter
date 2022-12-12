@@ -34,52 +34,53 @@ class _AuthorizationWidgetState extends State<AuthorizationWidget> {
       body: LoadingOverlay(
         isLoading: widget.viewModel.isLoading,
         child: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.perm_contact_calendar_rounded,
-                        size: 150.0,
-                        color: Colors.brown,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.perm_contact_calendar_rounded,
+                      size: 150.0,
+                      color: Colors.brown,
+                    ),
+                    StyledTextField(
+                      fieldTitle: localization.email.capitalize(),
+                      controller: emailController,
+                      error: widget.viewModel.emailError,
+                    ),
+                    StyledTextField(
+                      fieldTitle: localization.password.capitalize(),
+                      controller: passwordController,
+                      error: widget.viewModel.passwordError,
+                    ),
+                    RegularButton(
+                      onTap: () => widget.viewModel.onLogInPressed(
+                        email: emailController.text,
+                        password: passwordController.text,
                       ),
-                      StyledTextField(
-                        fieldTitle: localization.email.capitalize(),
-                        controller: emailController,
-                        error: widget.viewModel.emailError,
-                      ),
-                      StyledTextField(
-                        fieldTitle: localization.password.capitalize(),
-                        controller: passwordController,
-                        error: widget.viewModel.passwordError,
-                      ),
-                    ]),
-              ),
-              RegularButton(
-                onTap: () => widget.viewModel.onLogInPressed(
-                  email: emailController.text,
-                  password: passwordController.text,
+                      text: localization.logIn.capitalize(),
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    RegularButton(
+                      onTap: widget.viewModel.onBackPressed,
+                      text: localization.back.capitalize(),
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      buttonColor: AppColors.lightOrange,
+                    ),
+                  ],
                 ),
-                text: localization.logIn,
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              RegularButton(
-                onTap: widget.viewModel.onBackPressed,
-                text: localization.back.capitalize(),
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                buttonColor: AppColors.lightOrange,
-              ),
-            ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }

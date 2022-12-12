@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:logotime/extensions.dart';
 import 'package:logotime/widget/common/animation/loading_placeholder.dart';
 import 'package:logotime/widget/common/buttons/regular_button.dart';
-import 'package:logotime/widget/common/clipper/avatar_clipper.dart';
 import 'package:logotime/widget/common/lists/text_with_label.dart';
 import 'package:logotime/widget/home/home_view_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,7 +16,7 @@ class HomeWidget extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My account'),
+        title: Text(localizations.myAccount),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -67,9 +66,9 @@ class HomeWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Text(
-                      'Contact info',
-                      style: TextStyle(
+                    Text(
+                      localizations.contactInfo,
+                      style: const TextStyle(
                         fontSize: 32.0,
                       ),
                       textAlign: TextAlign.left,
@@ -93,15 +92,15 @@ class HomeWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Text(
-                      'Stats',
-                      style: TextStyle(
+                    Text(
+                      localizations.stats,
+                      style: const TextStyle(
                         fontSize: 32.0,
                       ),
                       textAlign: TextAlign.left,
                     ),
                     TextWithLabel(
-                      label: 'Joined on',
+                      label: localizations.joinedOn,
                       text: LoadingPlaceholder(
                         isLoading: viewModel.isLoading,
                         child: Text(
@@ -116,7 +115,7 @@ class HomeWidget extends StatelessWidget {
             ),
             RegularButton(
               onTap: viewModel.onLogOutPressed,
-              text: 'Log out',
+              text: localizations.logOut,
             )
           ],
         ),

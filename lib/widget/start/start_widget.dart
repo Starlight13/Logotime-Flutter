@@ -7,18 +7,10 @@ import 'package:logotime/widget/start/start_view_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logotime/widget/start/start_widget_assets.dart';
 
-class StartWidget extends StatefulWidget {
+class StartWidget extends StatelessWidget {
   const StartWidget({super.key, required this.viewModel});
 
   final StartViewModel viewModel;
-
-  @override
-  State<StartWidget> createState() => _StartWidgetState();
-}
-
-class _StartWidgetState extends State<StartWidget>
-    with SingleTickerProviderStateMixin {
-  late AnimationController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +72,7 @@ class _StartWidgetState extends State<StartWidget>
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       RegularButton(
-                        onTap: widget.viewModel.onCreateOrganisationPressed,
+                        onTap: viewModel.onCreateOrganisationPressed,
                         text: localization.registerOrganisation.capitalize(),
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         buttonColor: AppColors.white,
@@ -102,7 +94,7 @@ class _StartWidgetState extends State<StartWidget>
                             width: 5.0,
                           ),
                           GestureDetector(
-                            onTap: widget.viewModel.onLogInPressed,
+                            onTap: viewModel.onLogInPressed,
                             child: Text(
                               localization.logIn.capitalize(),
                               style: const TextStyle(
