@@ -5,6 +5,8 @@ import 'package:logotime/connector/registration/create_organisation_connector.da
 import 'package:logotime/connector/registration/create_owner_connector.dart';
 import 'package:logotime/connector/start/start_connector.dart';
 import 'package:logotime/service/navigation/route_direction.dart';
+import 'package:logotime/service/navigation/custom_route.dart';
+import 'package:logotime/service/navigation/transition_type.dart';
 
 abstract class IRouteDefinitionService {
   final key = GlobalKey<NavigatorState>();
@@ -22,9 +24,11 @@ class RouteDefinitionService extends IRouteDefinitionService {
           settings: settings,
         );
       case RouteDirection.createOrganisationOwnerScreen:
-        return MaterialPageRoute(
-          builder: ((_) => const CreateOwnerConnector()),
+        return CustomRoute(
+          screen: const CreateOwnerConnector(),
+          transitionType: TransitionType.avatarReveal,
           settings: settings,
+          animationDuration: const Duration(milliseconds: 600),
         );
       case RouteDirection.createOrganisationScreen:
         return MaterialPageRoute(
@@ -32,9 +36,11 @@ class RouteDefinitionService extends IRouteDefinitionService {
           settings: settings,
         );
       case RouteDirection.logInScreen:
-        return MaterialPageRoute(
-          builder: ((_) => const AuthorizationConnector()),
+        return CustomRoute(
+          screen: const AuthorizationConnector(),
+          transitionType: TransitionType.avatarReveal,
           settings: settings,
+          animationDuration: const Duration(milliseconds: 600),
         );
       case RouteDirection.homeScreen:
         return MaterialPageRoute(

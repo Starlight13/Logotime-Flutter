@@ -6,6 +6,7 @@ part 'home_view_model.g.dart';
 abstract class HomeViewModel
     implements Built<HomeViewModel, HomeViewModelBuilder> {
   UserModel? get user;
+  bool get isLoading;
   Function() get onLogOutPressed;
   Function() get onUpdatePressed;
 

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logotime/middleware/user_middleware.dart';
 import 'package:logotime/network/model/user/user_model.dart';
@@ -8,7 +6,6 @@ import 'package:logotime/network/user/user_network_service.dart';
 import 'package:logotime/redux/action/common/operation_result_action.dart';
 import 'package:logotime/redux/action/user/user_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
-import 'package:logotime/redux/state/authorization/authorization_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:redux/redux.dart';

@@ -2,7 +2,7 @@ import 'package:logotime/middleware/base_middleware.dart';
 import 'package:logotime/network/organisation/organisation_network_service.dart';
 import 'package:logotime/network/organisation/request_model/create_organisation_request_model.dart';
 import 'package:logotime/redux/action/common/operation_result_action.dart';
-import 'package:logotime/redux/action/registration/create_organisation_action.dart';
+import 'package:logotime/redux/action/registration_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
 import 'package:logotime/redux/state/registration/registration_state.dart';
 
@@ -22,6 +22,7 @@ class OrganisationMiddleware extends BaseMiddleware {
     RegistrationState state,
     Function(dynamic action) dispatch,
   ) {
+    dispatch(RegistrationLoadingChanged(true));
     organisationNetworkService
         .createOrganisation(
           CreateOrganisationRequestModel((model) => model
@@ -47,6 +48,11 @@ class OrganisationMiddleware extends BaseMiddleware {
             },
           ),
         )
-        .catchError((e, stacktrace) => null);
+        .catchError((e, stacktrace) => null)
+        .whenComplete(
+          () => dispatch(
+            RegistrationLoadingChanged(false),
+          ),
+        );
   }
 }

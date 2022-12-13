@@ -43,14 +43,14 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Balsamiq Sans',
           textTheme: const TextTheme(
             bodyMedium: TextStyle(
-              fontSize: 20.0,
+              fontSize: 24.0,
             ),
           ),
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColors.white,
             iconTheme: IconThemeData(color: Colors.brown),
             titleTextStyle: TextStyle(
-              color: Colors.brown,
+              color: Color.fromARGB(255, 203, 136, 29),
               fontSize: 22.0,
               fontFamily: 'Balsamiq Sans',
             ),

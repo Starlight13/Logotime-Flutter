@@ -100,4 +100,16 @@ void main() {
     expect(state.emailError, null);
     expect(state.passwordError, null);
   });
+
+  test('Authorization Reducer - loader changed', () async {
+    //Arrange
+    final initialState = AuthorizationState.initial();
+    final action = AuthorizationLoadingChanged(true);
+
+    //Act
+    final state = authorizationReducer(initialState, action);
+
+    //Assert
+    expect(state.isLoading, action.isLoading);
+  });
 }

@@ -22,6 +22,7 @@ class UserMiddleware extends BaseMiddleware {
     AuthorizationState state,
     Function(dynamic) dispatch,
   ) {
+    dispatch(UserLoadingChangedAction(true));
     userNetworkService
         .getCurrentUserInfo()
         ?.then(
@@ -41,6 +42,7 @@ class UserMiddleware extends BaseMiddleware {
             ),
           ),
         )
-        .catchError((e) => null);
+        .catchError((e) => null)
+        .whenComplete(() => dispatch(UserLoadingChangedAction(false)));
   }
 }

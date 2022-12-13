@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:logotime/middleware/base_middleware.dart';
@@ -28,6 +29,7 @@ class AuthorizationMiddleware extends BaseMiddleware {
     AuthorizationState state,
     Function(dynamic) dispatch,
   ) {
+    dispatch(AuthorizationLoadingChanged(true));
     userNetworkService
         .logIn(
           email: state.email,
@@ -50,6 +52,7 @@ class AuthorizationMiddleware extends BaseMiddleware {
             )),
           ),
         )
-        .catchError((e, stacktrace) => null);
+        .catchError((e, stacktrace) => log(e))
+        .whenComplete(() => dispatch(AuthorizationLoadingChanged(false)));
   }
 }

@@ -7,3 +7,9 @@ class CurrentUserInfoArrivedAction {
 
   CurrentUserInfoArrivedAction({required this.userModel});
 }
+
+class UserLoadingChangedAction {
+  final bool isLoading;
+
+  UserLoadingChangedAction(this.isLoading);
+}

@@ -16,6 +16,8 @@ class _$CreateOrganisationViewModel extends CreateOrganisationViewModel {
   @override
   final RulesModel organisationRules;
   @override
+  final bool isLoading;
+  @override
   final Function({bool? isAllowed, bool? needApproval})
       onSubstituteMeRuleChanged;
   @override
@@ -39,6 +41,7 @@ class _$CreateOrganisationViewModel extends CreateOrganisationViewModel {
       this.organisationSizeError,
       this.maxApplicationsError,
       required this.organisationRules,
+      required this.isLoading,
       required this.onSubstituteMeRuleChanged,
       required this.onSwapShiftRuleChanged,
       required this.onCheckInRuleChanged,
@@ -47,6 +50,8 @@ class _$CreateOrganisationViewModel extends CreateOrganisationViewModel {
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         organisationRules, r'CreateOrganisationViewModel', 'organisationRules');
+    BuiltValueNullFieldError.checkNotNull(
+        isLoading, r'CreateOrganisationViewModel', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(onSubstituteMeRuleChanged,
         r'CreateOrganisationViewModel', 'onSubstituteMeRuleChanged');
     BuiltValueNullFieldError.checkNotNull(onSwapShiftRuleChanged,
@@ -77,6 +82,7 @@ class _$CreateOrganisationViewModel extends CreateOrganisationViewModel {
         organisationSizeError == other.organisationSizeError &&
         maxApplicationsError == other.maxApplicationsError &&
         organisationRules == other.organisationRules &&
+        isLoading == other.isLoading &&
         onSubstituteMeRuleChanged == _$dynamicOther.onSubstituteMeRuleChanged &&
         onSwapShiftRuleChanged == _$dynamicOther.onSwapShiftRuleChanged &&
         onCheckInRuleChanged == _$dynamicOther.onCheckInRuleChanged &&
@@ -95,10 +101,12 @@ class _$CreateOrganisationViewModel extends CreateOrganisationViewModel {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, organisationNameError.hashCode),
-                                    organisationSizeError.hashCode),
-                                maxApplicationsError.hashCode),
-                            organisationRules.hashCode),
+                                $jc(
+                                    $jc($jc(0, organisationNameError.hashCode),
+                                        organisationSizeError.hashCode),
+                                    maxApplicationsError.hashCode),
+                                organisationRules.hashCode),
+                            isLoading.hashCode),
                         onSubstituteMeRuleChanged.hashCode),
                     onSwapShiftRuleChanged.hashCode),
                 onCheckInRuleChanged.hashCode),
@@ -113,6 +121,7 @@ class _$CreateOrganisationViewModel extends CreateOrganisationViewModel {
           ..add('organisationSizeError', organisationSizeError)
           ..add('maxApplicationsError', maxApplicationsError)
           ..add('organisationRules', organisationRules)
+          ..add('isLoading', isLoading)
           ..add('onSubstituteMeRuleChanged', onSubstituteMeRuleChanged)
           ..add('onSwapShiftRuleChanged', onSwapShiftRuleChanged)
           ..add('onCheckInRuleChanged', onCheckInRuleChanged)
@@ -149,6 +158,10 @@ class CreateOrganisationViewModelBuilder
       _$this._organisationRules ??= new RulesModelBuilder();
   set organisationRules(RulesModelBuilder? organisationRules) =>
       _$this._organisationRules = organisationRules;
+
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
   Function({bool? isAllowed, bool? needApproval})? _onSubstituteMeRuleChanged;
   Function({bool? isAllowed, bool? needApproval})?
@@ -209,6 +222,7 @@ class CreateOrganisationViewModelBuilder
       _organisationSizeError = $v.organisationSizeError;
       _maxApplicationsError = $v.maxApplicationsError;
       _organisationRules = $v.organisationRules.toBuilder();
+      _isLoading = $v.isLoading;
       _onSubstituteMeRuleChanged = $v.onSubstituteMeRuleChanged;
       _onSwapShiftRuleChanged = $v.onSwapShiftRuleChanged;
       _onCheckInRuleChanged = $v.onCheckInRuleChanged;
@@ -242,10 +256,10 @@ class CreateOrganisationViewModelBuilder
               organisationSizeError: organisationSizeError,
               maxApplicationsError: maxApplicationsError,
               organisationRules: organisationRules.build(),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, r'CreateOrganisationViewModel', 'isLoading'),
               onSubstituteMeRuleChanged: BuiltValueNullFieldError.checkNotNull(
-                  onSubstituteMeRuleChanged,
-                  r'CreateOrganisationViewModel',
-                  'onSubstituteMeRuleChanged'),
+                  onSubstituteMeRuleChanged, r'CreateOrganisationViewModel', 'onSubstituteMeRuleChanged'),
               onSwapShiftRuleChanged: BuiltValueNullFieldError.checkNotNull(
                   onSwapShiftRuleChanged, r'CreateOrganisationViewModel', 'onSwapShiftRuleChanged'),
               onCheckInRuleChanged: BuiltValueNullFieldError.checkNotNull(
@@ -254,11 +268,10 @@ class CreateOrganisationViewModelBuilder
                   onUnassignedShiftRuleChanged,
                   r'CreateOrganisationViewModel',
                   'onUnassignedShiftRuleChanged'),
-              onCreateOrganisationButtonPressed:
-                  BuiltValueNullFieldError.checkNotNull(
-                      onCreateOrganisationButtonPressed,
-                      r'CreateOrganisationViewModel',
-                      'onCreateOrganisationButtonPressed'));
+              onCreateOrganisationButtonPressed: BuiltValueNullFieldError.checkNotNull(
+                  onCreateOrganisationButtonPressed,
+                  r'CreateOrganisationViewModel',
+                  'onCreateOrganisationButtonPressed'));
     } catch (_) {
       late String _$failedField;
       try {

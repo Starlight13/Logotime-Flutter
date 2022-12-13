@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logotime/extensions.dart';
 import 'package:logotime/widget/app_theme/app_colors.dart';
 import 'package:logotime/widget/authorization/authorization_view_model.dart';
+import 'package:logotime/widget/common/animation/loading_overlay.dart';
 import 'package:logotime/widget/common/buttons/regular_button.dart';
 import 'package:logotime/widget/common/forms/styled_text_field.dart';
 
@@ -30,15 +31,17 @@ class _AuthorizationWidgetState extends State<AuthorizationWidget> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
     return Scaffold(
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Column(
+      body: LoadingOverlay(
+        isLoading: widget.viewModel.isLoading,
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(
                       Icons.perm_contact_calendar_rounded,
@@ -55,28 +58,30 @@ class _AuthorizationWidgetState extends State<AuthorizationWidget> {
                       controller: passwordController,
                       error: widget.viewModel.passwordError,
                     ),
-                  ]),
-            ),
-            RegularButton(
-              onTap: () => widget.viewModel.onLogInPressed(
-                email: emailController.text,
-                password: passwordController.text,
+                    RegularButton(
+                      onTap: () => widget.viewModel.onLogInPressed(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      ),
+                      text: localization.logIn.capitalize(),
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    RegularButton(
+                      onTap: widget.viewModel.onBackPressed,
+                      text: localization.back.capitalize(),
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      buttonColor: AppColors.lightOrange,
+                    ),
+                  ],
+                ),
               ),
-              text: localization.logIn,
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
             ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            RegularButton(
-              onTap: widget.viewModel.onBackPressed,
-              text: localization.back.capitalize(),
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              buttonColor: AppColors.lightOrange,
-            ),
-          ],
+          ),
         ),
-      )),
+      ),
     );
   }
 

@@ -7,6 +7,7 @@ Reducer<HomeState> get homeReducer {
   return combineReducers([
     TypedReducer(_gotCurrentUserInfo),
     TypedReducer(_loggedOut),
+    TypedReducer(_homeLoadingChanged),
   ]);
 }
 
@@ -19,4 +20,11 @@ HomeState _gotCurrentUserInfo(
 
 HomeState _loggedOut(HomeState oldState, LogOutAction action) {
   return HomeState.initial();
+}
+
+HomeState _homeLoadingChanged(
+  HomeState oldState,
+  UserLoadingChangedAction action,
+) {
+  return oldState.rebuild((state) => state.isLoading = action.isLoading);
 }

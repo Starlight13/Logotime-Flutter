@@ -1,0 +1,1 @@
+enum TransitionType { avatarReveal }

@@ -7,11 +7,13 @@ class AuthorizationConverter
   Function(dynamic) dispatch;
   final String? emailError;
   final String? passwordError;
+  final bool isLoading;
 
   AuthorizationConverter({
     required this.emailError,
     required this.dispatch,
     required this.passwordError,
+    required this.isLoading,
   });
 
   @override
@@ -26,7 +28,8 @@ class AuthorizationConverter
                 password: password!,
               ),
             ))
-        ..onBackPressed = (() => dispatch(CancelLogInAction())),
+        ..onBackPressed = (() => dispatch(CancelLogInAction()))
+        ..isLoading = isLoading,
     );
   }
 }

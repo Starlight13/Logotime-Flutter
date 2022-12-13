@@ -9,11 +9,15 @@ part of 'home_state.dart';
 class _$HomeState extends HomeState {
   @override
   final UserModel? user;
+  @override
+  final bool isLoading;
 
   factory _$HomeState([void Function(HomeStateBuilder)? updates]) =>
       (new HomeStateBuilder()..update(updates))._build();
 
-  _$HomeState._({this.user}) : super._();
+  _$HomeState._({this.user, required this.isLoading}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(isLoading, r'HomeState', 'isLoading');
+  }
 
   @override
   HomeState rebuild(void Function(HomeStateBuilder) updates) =>
@@ -25,17 +29,21 @@ class _$HomeState extends HomeState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is HomeState && user == other.user;
+    return other is HomeState &&
+        user == other.user &&
+        isLoading == other.isLoading;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, user.hashCode));
+    return $jf($jc($jc(0, user.hashCode), isLoading.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'HomeState')..add('user', user))
+    return (newBuiltValueToStringHelper(r'HomeState')
+          ..add('user', user)
+          ..add('isLoading', isLoading))
         .toString();
   }
 }
@@ -47,12 +55,17 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   UserModelBuilder get user => _$this._user ??= new UserModelBuilder();
   set user(UserModelBuilder? user) => _$this._user = user;
 
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
+
   HomeStateBuilder();
 
   HomeStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _user = $v.user?.toBuilder();
+      _isLoading = $v.isLoading;
       _$v = null;
     }
     return this;
@@ -75,7 +88,11 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   _$HomeState _build() {
     _$HomeState _$result;
     try {
-      _$result = _$v ?? new _$HomeState._(user: _user?.build());
+      _$result = _$v ??
+          new _$HomeState._(
+              user: _user?.build(),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, r'HomeState', 'isLoading'));
     } catch (_) {
       late String _$failedField;
       try {

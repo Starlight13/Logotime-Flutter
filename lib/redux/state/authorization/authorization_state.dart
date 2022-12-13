@@ -9,6 +9,7 @@ abstract class AuthorizationState
   String? get email;
   String? get password;
   bool get isLoggedIn;
+  bool get isLoading;
 
   AuthorizationState._();
 
@@ -17,6 +18,8 @@ abstract class AuthorizationState
       _$AuthorizationState;
 
   factory AuthorizationState.initial() => AuthorizationState(
-        ((state) => state.isLoggedIn = false),
+        ((state) => state
+          ..isLoggedIn = false
+          ..isLoading = false),
       );
 }

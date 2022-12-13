@@ -11,6 +11,7 @@ abstract class CreateOrganisationViewModel
   String? get organisationSizeError;
   String? get maxApplicationsError;
   RulesModel get organisationRules;
+  bool get isLoading;
   Function({bool? isAllowed, bool? needApproval}) get onSubstituteMeRuleChanged;
   Function({bool? isAllowed, bool? needApproval}) get onSwapShiftRuleChanged;
   Function({bool? photoRequired, bool? geoRequired}) get onCheckInRuleChanged;

@@ -11,6 +11,7 @@ abstract class AuthorizationViewModel
     required String? email,
     required String? password,
   }) get onLogInPressed;
+  bool get isLoading;
 
   AuthorizationViewModel._();
 
