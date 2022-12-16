@@ -4,6 +4,17 @@ import 'package:built_value/serializer.dart';
 
 part 'rule_enums.g.dart';
 
+/// Rule which allows the user to give up the shift,
+/// for other users to substitute them.
+///
+/// There are 3 options for this rule:
+/// - When set to [prohibited], users are not allowed to give up shifts.
+///
+/// - When set to [allowedWithApproval], users can give up shifts,
+/// but the user with [UserRole.administrator] or [UserRole.owner] rights
+/// has to approve the request.
+///
+/// - When set to [allowed], users can give up shifts, without further approval.
 @BuiltValueEnum(wireName: 'substituteMeRule')
 class SubstituteMeRule extends EnumClass {
   static Serializer<SubstituteMeRule> get serializer =>
@@ -24,6 +35,16 @@ class SubstituteMeRule extends EnumClass {
   static SubstituteMeRule valueOf(String name) => _$valueOf(name);
 }
 
+/// Rule which allows the users to swap shifts with each other.
+///
+/// There are 3 options for this rule:
+/// - When set to [prohibited], users are not allowed to swap shifts.
+///
+/// - When set to [allowedWithApproval], users can swap shifts,
+/// but the user with [UserRole.administrator] or [UserRole.owner] rights
+/// has to approve the request.
+///
+/// - When set to [allowed], users can swap shifts, without further approval.
 @BuiltValueEnum(wireName: 'swapShiftRule')
 class SwapShiftRule extends EnumClass {
   static Serializer<SwapShiftRule> get serializer => _$swapShiftRuleSerializer;
@@ -43,6 +64,21 @@ class SwapShiftRule extends EnumClass {
   static SwapShiftRule valueOf(String name) => _$swapValueOf(name);
 }
 
+/// Rule which defines which method will be used for users
+/// to check-in on the shift.
+///
+/// There are 4 options for this rule:
+/// - When set to [button], users can check-in with a simple button press.
+///
+/// - When set to [geo], users can press the check-in button,
+/// but the check-in will only be successful
+/// if the user's geolocation is the same as set for given organisation.
+///
+/// - When set to [photo], users can press the check-in button,
+/// and be prompted to make a selfie at the working place, for user with
+/// [UserRole.administrator] or [UserRole.owner] rights to check later.
+///
+/// - [geoAndPhoto] option is a combination if [geo] and [photo] options.
 @BuiltValueEnum(wireName: 'checkInRule')
 class CheckInRule extends EnumClass {
   static Serializer<CheckInRule> get serializer => _$checkInRuleSerializer;
@@ -65,6 +101,14 @@ class CheckInRule extends EnumClass {
   static CheckInRule valueOf(String name) => _$checkInValueOf(name);
 }
 
+/// Rule which allows the users with [UserRole.administrator] or
+/// [UserRole.owner] rights to create unassigned shifts
+/// for other users to pick up.
+///
+/// There are 2 options for this rule:
+/// - When set to [prohibited], users are not allowed to create unassigned shifts.
+///
+/// - When set to [allowed], users can create unassigned shifts.
 @BuiltValueEnum(wireName: 'NotAssignedShiftRule')
 class UnassignedShiftRule extends EnumClass {
   static Serializer<UnassignedShiftRule> get serializer =>

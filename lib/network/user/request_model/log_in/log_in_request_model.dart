@@ -7,6 +7,7 @@ import 'package:logotime/network/serializers.dart';
 
 part 'log_in_request_model.g.dart';
 
+/// Request model to make up the body for log in requests.
 abstract class LogInRequestModel
     implements
         Built<LogInRequestModel, LogInRequestModelBuilder>,

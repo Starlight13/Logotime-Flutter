@@ -8,9 +8,12 @@ import 'package:logotime/service/navigation/route_direction.dart';
 import 'package:logotime/service/navigation/custom_route.dart';
 import 'package:logotime/service/navigation/transition_type.dart';
 
+/// Service for defining navigation routes.
 abstract class IRouteDefinitionService {
+  /// App's navigator key
   final key = GlobalKey<NavigatorState>();
 
+  /// Generate route according to [settings].
   Route generateRoutes(RouteSettings settings);
 }
 

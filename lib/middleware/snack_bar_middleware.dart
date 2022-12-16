@@ -3,7 +3,9 @@ import 'package:logotime/redux/action/common/operation_result_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
 import 'package:logotime/service/snack_bar/snack_bar_service.dart';
 
+/// Middleware to show snack bars
 class SnackBarMiddleware extends BaseMiddleware {
+  /// Service dor working with snack bar
   final ISnackBarService snackBarService;
 
   SnackBarMiddleware({required this.snackBarService});

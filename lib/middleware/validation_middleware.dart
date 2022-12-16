@@ -5,8 +5,10 @@ import 'package:logotime/redux/action/registration_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
 import 'package:logotime/service/validation/validation_service.dart';
 
+/// Middleware to validate data
 class ValidationMiddleware extends BaseMiddleware {
   //TODO: translate errors
+  /// Service for validation
   final IValidationService validationService;
 
   ValidationMiddleware({required this.validationService});
@@ -27,6 +29,13 @@ class ValidationMiddleware extends BaseMiddleware {
     }
   }
 
+  /// Validates owner info passed with [action].
+  ///
+  /// Dispatches [OwnerInfoValidationSucceeded] and [NavigateToCreateOrganisationAction]
+  /// in case all the validation steps succeeded.
+  ///
+  /// Dispatches an appropriate [ValidationFailedAction]
+  /// in case a validation step fails.
   void _validateOwnerInfo(
     OwnerInfoEnteredAction action,
     AppState state,
@@ -89,6 +98,13 @@ class ValidationMiddleware extends BaseMiddleware {
     }
   }
 
+  /// Validates organisation info passed with [action].
+  ///
+  /// Dispatches [OrganisationInfoValidationSucceededAction] and [CreateOrganisationNetworkAction]
+  /// in case all the validation steps succeeded.
+  ///
+  /// Dispatches an appropriate [ValidationFailedAction]
+  /// in case a validation step fails.
   void _validateOrganisationInfo(
     ValidateOrganisationInfo action,
     AppState state,
@@ -126,6 +142,13 @@ class ValidationMiddleware extends BaseMiddleware {
     }
   }
 
+  /// Validates login info passed with [action]
+  ///
+  /// Dispatches [LogInValidationSuccessAction] and [LogInNetworkAction]
+  /// in case all the validation steps succeeded.
+  ///
+  /// Dispatches an appropriate [ValidationFailedAction]
+  /// in case a validation step fails.
   void _validateLogInInfo(ValidateLogInInfoAction action, AppState state,
       Function(dynamic) dispatch) {
     dispatch(LogInErrorsClearedAction());

@@ -1,3 +1,4 @@
+/// Network result returned from a request.
 abstract class INetworkResult<T> {
   void when(Function(Success) success, Function(Failure) error) {
     if (this is Success) {
@@ -8,12 +9,14 @@ abstract class INetworkResult<T> {
   }
 }
 
+/// Network result returned from a successful request.
 class Success<T> extends INetworkResult<T> {
   final T? data;
 
   Success(this.data);
 }
 
+/// Network result returned from a failed request.
 class Failure<T> extends INetworkResult<T> {
   final String errorCode;
   final String message;

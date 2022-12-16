@@ -4,12 +4,16 @@ import 'package:logotime/network/network_service.dart';
 
 import 'request_model/create_organisation_request_model.dart';
 
+/// Service for making organisation requests.
 abstract class IOrganisationNetworkService {
+  /// Makes request to create organisation.
+  /// Sets [createOrganisationRequestModel] as request body.
   Future<INetworkResult<dynamic>> createOrganisation(
       CreateOrganisationRequestModel createOrganisationRequestModel);
 }
 
 class OrganisationNetworkService implements IOrganisationNetworkService {
+  /// Path for requests.
   static const String route = '/organization';
 
   final DioService _dio;

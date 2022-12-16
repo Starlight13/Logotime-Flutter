@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:logotime/service/snack_bar/snack_bar_definition_service.dart';
 import 'package:logotime/widget/app_theme/app_colors.dart';
 
+/// Service for working with the snack bars
 abstract class ISnackBarService {
+  /// Show a 'success' snack bar.
   void showSuccess(String message);
+
+  /// Show an 'error' snack bar.
   void showError(String message);
 }
 

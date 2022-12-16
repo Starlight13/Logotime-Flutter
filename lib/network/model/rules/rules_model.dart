@@ -4,6 +4,7 @@ import 'package:logotime/network/model/rules/rule_enums.dart';
 import 'package:logotime/network/serializers.dart';
 part 'rules_model.g.dart';
 
+/// Rules of an organisation.
 @BuiltValue(wireName: 'rules')
 abstract class RulesModel implements Built<RulesModel, RulesModelBuilder> {
   SubstituteMeRule get substituteMeRule;
@@ -15,6 +16,8 @@ abstract class RulesModel implements Built<RulesModel, RulesModelBuilder> {
   @BuiltValueField(wireName: 'notAssignedShiftRule')
   UnassignedShiftRule get unassignedShiftRule;
 
+  /// Maximum number of applications for unassigned shifts
+  /// that can be waiting for approval simultaneously.
   @BuiltValueField(wireName: 'maxEmployeeShiftApplication')
   int get maxApplications;
 

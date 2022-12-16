@@ -6,7 +6,9 @@ import 'package:logotime/redux/action/user/user_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
 import 'package:logotime/redux/state/authorization/authorization_state.dart';
 
+/// Middleware for making and processing user requests.
 class UserMiddleware extends BaseMiddleware {
+  /// Service for making user requests.
   final IUserNetworkService userNetworkService;
 
   UserMiddleware({required this.userNetworkService});
@@ -18,6 +20,13 @@ class UserMiddleware extends BaseMiddleware {
     }
   }
 
+  /// Makes a request to get current user info
+  /// and process the request result.
+  ///
+  /// Dispatches [CurrentUserInfoArrivedAction] and [OperationSuccessAction]
+  /// if the request was successful.
+  ///
+  /// Dispatches [OperationFailureAction] if the request failed.
   void _getCurrentUserInfo(
     AuthorizationState state,
     Function(dynamic) dispatch,
