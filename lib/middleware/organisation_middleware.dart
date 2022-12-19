@@ -6,7 +6,9 @@ import 'package:logotime/redux/action/registration_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
 import 'package:logotime/redux/state/registration/registration_state.dart';
 
+/// Middleware to make and process organisation requests.
 class OrganisationMiddleware extends BaseMiddleware {
+  /// Service for making organisation requests.
   final IOrganisationNetworkService organisationNetworkService;
 
   OrganisationMiddleware({required this.organisationNetworkService});
@@ -18,6 +20,13 @@ class OrganisationMiddleware extends BaseMiddleware {
     }
   }
 
+  /// Makes request to create organisation according to [state]
+  /// and processes the request result.
+  ///
+  /// Dispatches [OrganisationCreatedAction] and [OperationSuccessAction]
+  /// if the request was successful.
+  ///
+  /// Dispatches [OperationFailureAction] if the request failed.
   void _createOrganisation(
     RegistrationState state,
     Function(dynamic action) dispatch,

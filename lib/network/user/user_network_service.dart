@@ -5,14 +5,18 @@ import 'package:logotime/network/request_model.dart';
 import 'package:logotime/network/user/request_model/log_in/log_in_request_model.dart';
 import 'package:logotime/network/user/token/token_service.dart';
 
+/// Service for making user requests.
 abstract class IUserNetworkService {
+  /// Makes a request to log in with given [email] and [password].
   Future<INetworkResult<dynamic>> logIn({
     required String? email,
     required String? password,
   });
 
+  /// Makes a request to get user info by user's [id].
   Future<INetworkResult> getUserInfo(String id);
 
+  /// Makes request to get current user's info.
   Future<INetworkResult>? getCurrentUserInfo();
 }
 

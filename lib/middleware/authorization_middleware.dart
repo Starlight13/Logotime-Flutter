@@ -9,7 +9,9 @@ import 'package:logotime/redux/action/user/authorization_action.dart';
 import 'package:logotime/redux/state/app/app_state.dart';
 import 'package:logotime/redux/state/authorization/authorization_state.dart';
 
+/// Middleware for making and processing authorization requests.
 class AuthorizationMiddleware extends BaseMiddleware {
+  /// Service for making authorization requests.
   final IUserNetworkService userNetworkService;
 
   AuthorizationMiddleware({required this.userNetworkService});
@@ -25,6 +27,14 @@ class AuthorizationMiddleware extends BaseMiddleware {
     }
   }
 
+  /// Makes login request according to [state]
+  /// and processes the request result.
+  ///
+  /// Dispatches [LogInSuccessAction], [NavigateToHomeScreenReplacementAction]
+  ///  and [OperationSuccessAction]
+  /// if the request was successful.
+  ///
+  /// Dispatches [OperationFailureAction] if the request failed.
   void _logIn(
     AuthorizationState state,
     Function(dynamic) dispatch,

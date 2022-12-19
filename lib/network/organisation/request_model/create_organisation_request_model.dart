@@ -10,6 +10,7 @@ import 'package:logotime/network/serializers.dart';
 
 part 'create_organisation_request_model.g.dart';
 
+/// Request model that makes up the body of the request to create organisation.
 abstract class CreateOrganisationRequestModel
     implements
         Built<CreateOrganisationRequestModel,

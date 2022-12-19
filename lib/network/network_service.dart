@@ -9,6 +9,7 @@ import 'package:logotime/network/network_result.dart';
 import 'package:logotime/network/request_model.dart';
 import 'package:logotime/network/user/token/token_service.dart';
 
+/// Service for making requests with Dio.
 class DioService {
   final String _baseUrl;
   late Dio _dio;
@@ -63,6 +64,7 @@ class DioService {
     }
   }
 
+  /// Sets access token
   void setToken(String? accessToken) {
     _tokenService.token = accessToken;
   }
@@ -82,6 +84,12 @@ class DioService {
     return true;
   }
 
+  /// Makes [NetworkRequest.methodType] request to [NetworkRequest.path].
+  /// with [NetworkRequest.data].
+  ///
+  /// Returns [Success] if te request succeeded.
+  ///
+  /// Returns [Failure] if the request failed.
   Future<INetworkResult<dynamic>> makeRequest<T extends RequestModel>(
     NetworkRequest<T> request,
   ) async {

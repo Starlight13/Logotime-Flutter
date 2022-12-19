@@ -7,12 +7,16 @@ part 'organisation_model.g.dart';
 
 abstract class OrganisationModel
     implements Built<OrganisationModel, OrganisationModelBuilder> {
+  /// This organisation's id.
   String? get id;
 
+  /// Name of this organisation.
   String? get name;
 
+  /// This organisation's size.
   OrganisationSize? get organizationSize;
 
+  /// Set of rules for this organisation
   RulesModel? get rules;
 
   OrganisationModel._();
